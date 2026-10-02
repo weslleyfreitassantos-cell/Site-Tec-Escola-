@@ -120,7 +120,7 @@ function setHeroSlide(nextIndex) {
 
 function restartHeroTimer() {
   window.clearInterval(heroTimer);
-  if (!reduceMotion && heroSlides.length > 1) heroTimer = window.setInterval(() => setHeroSlide(heroIndex + 1), 1000);
+  if (!reduceMotion && heroSlides.length > 1) heroTimer = window.setInterval(() => setHeroSlide(heroIndex + 1), 4000);
 }
 
 const phoneScenes = {
@@ -158,7 +158,7 @@ function restartPhoneTimer() {
       const names = Object.keys(phoneScenes);
       const active = phoneTabs.findIndex((tab) => tab.classList.contains('is-active'));
       setPhoneScene(names[(active + 1) % names.length]);
-    }, 1000);
+    }, 4000);
   }
 }
 
