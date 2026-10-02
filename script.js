@@ -11,9 +11,6 @@ const hero = document.querySelector('.hero');
 const heroPerson = document.querySelector('.hero-person');
 const heroSlides = [...document.querySelectorAll('[data-hero-slide]')];
 const heroImages = [...document.querySelectorAll('.hero-slide img')];
-const heroCounter = document.querySelector('[data-hero-counter]');
-const heroPrev = document.querySelector('[data-hero-prev]');
-const heroNext = document.querySelector('[data-hero-next]');
 const backdrop = document.querySelector('.person-backdrop');
 const phoneImage = document.querySelector('[data-phone-image]');
 const phoneTabs = [...document.querySelectorAll('[data-phone-tab]')];
@@ -67,7 +64,6 @@ function setHeroSlide(nextIndex) {
   if (!heroSlides.length) return;
   heroIndex = (nextIndex + heroSlides.length) % heroSlides.length;
   heroSlides.forEach((slide, index) => slide.classList.toggle('is-active', index === heroIndex));
-  if (heroCounter) heroCounter.textContent = `${String(heroIndex + 1).padStart(2, '0')} / ${String(heroSlides.length).padStart(2, '0')}`;
 }
 
 function restartHeroTimer() {
@@ -136,19 +132,6 @@ setHeroSlide(0);
 restartHeroTimer();
 setPhoneScene('dashboard');
 restartPhoneTimer();
-
-heroPrev?.addEventListener('click', () => {
-  setHeroSlide(heroIndex - 1);
-  restartHeroTimer();
-});
-heroNext?.addEventListener('click', () => {
-  setHeroSlide(heroIndex + 1);
-  restartHeroTimer();
-});
-heroPerson?.addEventListener('mouseenter', () => window.clearInterval(heroTimer));
-heroPerson?.addEventListener('mouseleave', restartHeroTimer);
-heroPerson?.addEventListener('focusin', () => window.clearInterval(heroTimer));
-heroPerson?.addEventListener('focusout', restartHeroTimer);
 
 phoneTabs.forEach((tab) => tab.addEventListener('click', () => {
   setPhoneScene(tab.dataset.phoneTab);
