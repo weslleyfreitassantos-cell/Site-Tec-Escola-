@@ -108,6 +108,7 @@ function setPhoneScene(name) {
     tab.setAttribute('aria-selected', String(isActive));
   });
   phoneImage.classList.add('is-changing');
+  phoneImage.dataset.phoneScene = name;
   window.setTimeout(() => {
     phoneImage.src = scene.src;
     phoneImage.alt = scene.alt;
