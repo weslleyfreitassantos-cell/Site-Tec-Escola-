@@ -6,7 +6,7 @@ Primeira versão visual da landing page do Tec Escola, criada separadamente do s
 
 Abra `index.html` no navegador. A página não depende de build ou servidor.
 
-O botão `Acessar` aponta para `https://tecescola.grupotec.dev.br/login` e será trocado para uma rota relativa quando a landing for integrada ao projeto principal.
+O botão `Acessar` aponta para `https://admin.grupotec.dev.br`, que concentra o acesso administrativo da plataforma.
 
 ## Próxima integração
 
