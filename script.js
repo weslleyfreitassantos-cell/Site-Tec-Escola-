@@ -17,6 +17,13 @@ const phoneTabs = [...document.querySelectorAll('[data-phone-tab]')];
 const phoneLabel = document.querySelector('[data-phone-label]');
 const phoneCounter = document.querySelector('[data-phone-counter]');
 const phoneStage = document.querySelector('.phone-stage');
+const dashboardMotion = document.querySelector('[data-dashboard-motion]');
+const dashboardMotionRing = dashboardMotion?.querySelector('[data-motion-ring]');
+const dashboardMotionFrequency = dashboardMotion?.querySelector('[data-motion-frequency]');
+const dashboardMotionContext = dashboardMotion?.querySelector('[data-motion-context]');
+const dashboardMotionMetric = dashboardMotion?.querySelector('[data-motion-metric]');
+const dashboardMotionGrowth = dashboardMotion?.querySelector('[data-motion-growth]');
+const dashboardMotionBars = [...(dashboardMotion?.querySelectorAll('.dashboard-motion-bars i') || [])];
 const navLinks = [...document.querySelectorAll('.desktop-nav a')];
 const differentialsNav = document.querySelector('[data-differentials-nav]');
 const differentialsSection = document.querySelector('#diferenciais');
@@ -25,6 +32,7 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 let heroIndex = 0;
 let heroTimer;
 let phoneTimer;
+let dashboardMotionFrame;
 
 const whatsappNumber = (whatsappLink?.dataset.whatsappNumber || '').replace(/\D/g, '');
 whatsappLink?.addEventListener('click', (event) => {
@@ -63,6 +71,12 @@ const screens = {
     caption: 'Aprendizagem em movimento',
     content: '<div class="metric metric-blue"><small>Em andamento</small><strong>Ciências</strong><span>2 atividades para concluir</span></div><div class="metric"><small>Desempenho</small><strong>84%</strong><span>Boa evolução</span></div><div class="preview-chart"><small>Progresso de estudos</small><div class="bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>',
   },
+};
+
+const dashboardScenes = {
+  dashboard: { frequency: '92%', ring: '92%', context: 'Matrículas ativas', metric: 'Matrículas ativas', growth: '+12%', bars: [35, 62, 48, 82, 57, 73, 90] },
+  schedule: { frequency: '88%', ring: '88%', context: 'Presença semanal', metric: 'Aulas acompanhadas', growth: '+8%', bars: [42, 54, 61, 48, 76, 69, 84] },
+  learning: { frequency: '84%', ring: '84%', context: 'Desempenho médio', metric: 'Atividades concluídas', growth: '+18%', bars: [30, 46, 58, 64, 72, 78, 94] },
 };
 
 function updateHeader() {
@@ -133,6 +147,19 @@ function setScreen(name) {
   const screen = screens[name];
   if (!screen) return;
   steps.forEach((step) => step.classList.toggle('is-active', step.dataset.screen === name));
+  const dashboardScene = dashboardScenes[name];
+  if (dashboardMotion && dashboardScene) {
+    dashboardMotion.dataset.scene = name;
+    dashboardMotionRing?.style.setProperty('--ring-progress', dashboardScene.ring);
+    if (dashboardMotionFrequency) dashboardMotionFrequency.textContent = dashboardScene.frequency;
+    if (dashboardMotionContext) dashboardMotionContext.textContent = dashboardScene.context;
+    if (dashboardMotionMetric) dashboardMotionMetric.textContent = dashboardScene.metric;
+    if (dashboardMotionGrowth) dashboardMotionGrowth.textContent = dashboardScene.growth;
+    dashboardScene.bars.forEach((height, index) => dashboardMotionBars[index]?.style.setProperty('--motion-bar-height', `${height}%`));
+    dashboardMotion.classList.remove('is-playing');
+    window.cancelAnimationFrame(dashboardMotionFrame);
+    dashboardMotionFrame = window.requestAnimationFrame(() => dashboardMotion.classList.add('is-playing'));
+  }
   if (screenLabel) screenLabel.textContent = screen.label;
   if (screenTitle) screenTitle.textContent = screen.title;
   if (caption) caption.textContent = screen.caption;
@@ -153,6 +180,7 @@ setHeroSlide(0);
 restartHeroTimer();
 setPhoneScene('dashboard');
 restartPhoneTimer();
+setScreen('dashboard');
 
 phoneTabs.forEach((tab) => tab.addEventListener('click', () => {
   setPhoneScene(tab.dataset.phoneTab);
