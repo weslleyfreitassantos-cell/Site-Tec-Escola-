@@ -20,10 +20,20 @@ const phoneStage = document.querySelector('.phone-stage');
 const navLinks = [...document.querySelectorAll('.desktop-nav a')];
 const differentialsNav = document.querySelector('[data-differentials-nav]');
 const differentialsSection = document.querySelector('#diferenciais');
+const whatsappLink = document.querySelector('[data-whatsapp-link]');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let heroIndex = 0;
 let heroTimer;
 let phoneTimer;
+
+const whatsappNumber = (whatsappLink?.dataset.whatsappNumber || '').replace(/\D/g, '');
+whatsappLink?.addEventListener('click', (event) => {
+  if (!whatsappNumber) {
+    event.preventDefault();
+    return;
+  }
+  whatsappLink.href = `https://wa.me/${whatsappNumber}`;
+});
 
 function setActiveNav(link) {
   navLinks.forEach((navLink) => {
