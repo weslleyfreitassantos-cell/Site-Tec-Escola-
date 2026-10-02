@@ -88,7 +88,7 @@ h3 { font-size: 21px; line-height: 1.1; }
 .note-top { top: 20%; left: -7%; animation: float-note-a 5.6s ease-in-out infinite; }
 .note-middle { top: 50%; right: -4%; animation: float-note-b 6.4s ease-in-out -1.4s infinite; }
 .note-bottom { bottom: 14%; left: 4%; animation: float-note-a 5.1s ease-in-out -2.2s infinite; }
-.demo-section { width: 100%; padding: 78px 0; border-radius: 0; background: linear-gradient(112deg, #0c2b83 0%, #2d48d2 37%, #58bde9 72%, var(--cyan) 100%); box-shadow: inset 0 1px 0 rgba(168,241,244,.34), inset 0 -1px 0 rgba(7,26,75,.18); }
+.demo-section { width: 100%; padding: 78px 0; border-radius: 0; background: linear-gradient(112deg, #0c2b83 0%, #2d48d2 37%, #58bde9 72%, var(--cyan) 100%); box-shadow: none; }
 .demo-layout { display: flex; width: min(1180px, calc(100% - clamp(32px, 5vw, 48px))); margin: 0 auto; align-items: center; justify-content: space-between; gap: clamp(32px, 6vw, 86px); }
 .demo-copy { min-width: 0; max-width: 520px; flex: 1 1 0; color: var(--white); }
 .demo-copy h2 { max-width: 540px; margin-bottom: 22px; font-size: clamp(38px, 4.2vw, 62px); line-height: 1; }
