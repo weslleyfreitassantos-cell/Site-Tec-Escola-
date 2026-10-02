@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Tec Escola conecta a gestão acadêmica, alunos, famílias e educadores em uma única plataforma." />
+    <meta name="theme-color" content="#092b88" />
+    <title>Tec Escola | Gestão acadêmica conectada</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header" data-header>
+      <a class="brand" href="#top" aria-label="Tec Escola, início">
+        <span class="brand-logo-frame"><img class="brand-logo" src="./assets/logo-tec-escola.png" alt="" /></span>
+        <span>
+          <strong>Tec Escola</strong>
+          <small>GESTÃO ACADÊMICA</small>
+        </span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Navegação principal">
+        <a href="#plataforma">Plataforma</a>
+        <a href="#perfis">Para quem é</a>
+        <a href="#diferenciais" data-differentials-nav>Diferenciais</a>
+        <a href="#faq">Perguntas frequentes</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="text-link" href="https://tecescola.grupotec.dev.br/login">Acessar</a>
+        <a class="button button-small button-light" href="#demonstracao">Solicitar demonstração</a>
+      </div>
+
+      <button class="menu-button" type="button" aria-label="Abrir menu" aria-expanded="false" data-menu-button>
+        <span></span><span></span><span></span>
+      </button>
+    </header>
+
+    <main id="top">
+      <section class="hero section-dark" aria-labelledby="hero-title">
+        <div class="hero-grid shell">
+          <div class="hero-copy">
+            <p class="eyebrow eyebrow-light">GESTÃO ACADÊMICA INTELIGENTE</p>
+            <h1 id="hero-title">Uma escola mais <em>conectada</em> com o futuro.</h1>
+            <p class="hero-lead">O Tec Escola aproxima gestão, alunos, famílias, professores e secretaria em uma única experiência.</p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#demonstracao">Quero conhecer o Tec Escola <span aria-hidden="true">↗</span></a>
+              <a class="button button-ghost" href="#plataforma">Ver a plataforma <span aria-hidden="true">↓</span></a>
+            </div>
+            <div class="hero-proof" aria-label="Pontos fortes da plataforma">
+              <span><b>✓</b> Rotina acadêmica</span>
+              <span><b>✓</b> Comunicação</span>
+              <span><b>✓</b> Aprendizagem</span>
+            </div>
+          </div>
+
+          <div class="hero-person" aria-label="Educadora usando o Tec Escola">
+            <div class="person-backdrop"></div>
+            <div class="hero-slides" aria-live="polite">
+              <figure class="hero-slide is-active" data-hero-slide="0">
+                <img src="./assets/educadora.png" alt="Educadora sorrindo com um notebook" />
+              </figure>
+              <figure class="hero-slide" data-hero-slide="1">
+                <img src="./assets/educadora-apontando.png" alt="A mesma educadora apontando para o painel acadêmico no notebook" />
+              </figure>
+            </div>
+            <div class="hero-carousel-controls" aria-label="Trocar imagem principal">
+              <button type="button" data-hero-prev aria-label="Imagem anterior">←</button>
+              <span data-hero-counter>01 / 02</span>
+              <button type="button" data-hero-next aria-label="Próxima imagem">→</button>
+            </div>
+            <div class="floating-note note-top"><span class="note-icon">◌</span><span>Decisões<br /><b>mais claras</b></span></div>
+            <div class="floating-note note-middle"><span class="note-icon">◷</span><span>Mais tempo<br /><b>para educar</b></span></div>
+            <div class="floating-note note-bottom"><span class="note-icon">↗</span><span>Todos<br /><b>conectados</b></span></div>
+          </div>
+
+          <form class="demo-form" id="demonstracao" data-demo-form>
+            <div class="form-heading">
+              <p class="eyebrow">FALE COM A GENTE</p>
+              <h2>Veja o Tec Escola em ação.</h2>
+              <p>Conte um pouco sobre sua instituição. Nós mostramos os caminhos que fazem sentido para a sua realidade.</p>
+            </div>
+            <label>Nome da instituição <span>*</span><input name="institution" required placeholder="Ex.: Colégio Horizonte" /></label>
+            <label>Seu nome <span>*</span><input name="name" required placeholder="Como podemos chamar você?" /></label>
+            <label>E-mail profissional <span>*</span><input name="email" type="email" required placeholder="voce@escola.com.br" /></label>
+            <div class="form-row">
+              <label>WhatsApp <span>*</span><input name="phone" required placeholder="(00) 00000-0000" /></label>
+              <label>Seu cargo <span>*</span><select name="role" required><option value="">Selecione</option><option>Direção</option><option>Coordenação</option><option>Secretaria</option><option>Outro</option></select></label>
+            </div>
+            <button class="button button-form" type="submit">Solicitar demonstração <span aria-hidden="true">↗</span></button>
+            <p class="form-status" role="status" data-form-status></p>
+            <small class="form-privacy">Ao enviar, você concorda em receber contato sobre o Tec Escola.</small>
+          </form>
+        </div>
+      </section>
+
+      <section class="section section-dark mobile-experience" id="mobile-experiencia">
+        <div class="shell mobile-grid">
+          <div class="phone-stage" aria-label="Demonstração do aplicativo Tec Escola">
+            <div class="phone-orbit phone-orbit-one"></div>
+            <div class="phone-orbit phone-orbit-two"></div>
+            <div class="phone-device">
+              <span class="phone-speaker" aria-hidden="true"></span>
+              <img data-phone-image src="./assets/phone-dashboard.jpeg" alt="Painel do aluno no celular" />
+              <span class="phone-shine" aria-hidden="true"></span>
+            </div>
+            <span class="phone-float-label">atualizado agora</span>
+          </div>
+          <div class="mobile-copy">
+            <p class="eyebrow eyebrow-light">NO CELULAR, DE VERDADE</p>
+            <h2>Uma experiência que cabe na rotina.</h2>
+            <p class="section-lead">O aluno consulta a grade, acompanha avisos e encontra caminhos de estudo sem perder o ritmo.</p>
+            <div class="phone-tabs" role="tablist" aria-label="Telas do aplicativo">
+              <button class="phone-tab is-active" type="button" data-phone-tab="dashboard" aria-selected="true">Painel do aluno</button>
+              <button class="phone-tab" type="button" data-phone-tab="livros" aria-selected="false">Central de livros</button>
+              <button class="phone-tab" type="button" data-phone-tab="login" aria-selected="false">Acesso seguro</button>
+            </div>
+            <div class="phone-status"><span class="caption-dot"></span><span data-phone-label>Painel do aluno</span><span data-phone-counter>01 / 03</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="trust-strip" aria-label="Pessoas atendidas pela plataforma">
+        <div class="shell trust-grid">
+          <p>Uma plataforma para toda a comunidade escolar.</p>
+          <span>Alunos</span><span>Famílias</span><span>Professores</span><span>Secretaria</span><span>Direção</span>
+        </div>
+      </section>
+
+      <section class="section section-light intro-section" id="plataforma">
+        <div class="shell intro-grid">
+          <div>
+            <p class="eyebrow">PLATAFORMA COMPLETA</p>
+            <h2>Menos retrabalho. Mais visão do que importa.</h2>
+          </div>
+          <p class="section-lead">Centralize a rotina acadêmica, organize a comunicação e acompanhe o desenvolvimento dos alunos com clareza. Cada perfil encontra o que precisa, no momento certo.</p>
+        </div>
+
+        <div class="shell feature-grid">
+          <article class="feature-card feature-card-blue"><span class="feature-number">01</span><h3>Organize o dia a dia</h3><p>Grade, turmas, matrículas, frequência, notas e documentos em um só lugar.</p><a href="#perfis">Conhecer os perfis <span>↗</span></a></article>
+          <article class="feature-card"><span class="feature-number">02</span><h3>Comunique melhor</h3><p>Avisos, materiais e informações importantes chegam a quem precisa acompanhar.</p><a href="#diferenciais">Ver diferenciais <span>↗</span></a></article>
+          <article class="feature-card"><span class="feature-number">03</span><h3>Acompanhe a aprendizagem</h3><p>Atividades, Central de Estudos e recomendações ajudam a transformar dados em ação.</p><a href="#experiencia">Ver a experiência <span>↗</span></a></article>
+        </div>
+      </section>
+
+      <section class="section section-white scroll-showcase" id="experiencia">
+        <div class="shell showcase-grid">
+          <div class="showcase-copy">
+            <p class="eyebrow">UMA EXPERIÊNCIA VIVA</p>
+            <h2>A informação acompanha o ritmo da escola.</h2>
+            <p class="section-lead">Conforme você avança, veja como diferentes pessoas usam a plataforma para tomar decisões, estudar e manter a rotina em movimento.</p>
+            <div class="showcase-steps">
+              <article class="showcase-step is-active" data-screen="dashboard"><span>01</span><div><h3>Uma visão para começar</h3><p>O dashboard reúne os próximos passos e os sinais importantes do dia.</p></div></article>
+              <article class="showcase-step" data-screen="schedule"><span>02</span><div><h3>Rotina sem ruído</h3><p>Grade de horários e compromissos ficam acessíveis para cada perfil.</p></div></article>
+              <article class="showcase-step" data-screen="learning"><span>03</span><div><h3>Aprendizagem em movimento</h3><p>Atividades, materiais e progresso conectam a sala de aula ao estudo.</p></div></article>
+            </div>
+          </div>
+
+          <div class="device-wrap" aria-label="Demonstração visual do painel Tec Escola">
+            <div class="device-glow"></div>
+            <div class="browser-window">
+              <div class="browser-bar"><span></span><span></span><span></span><small>app.tecescola</small><b>◔</b></div>
+              <div class="app-preview">
+                <aside class="preview-sidebar"><div class="preview-logo">TE</div><i></i><i></i><i></i><i></i><i></i></aside>
+                <div class="preview-main">
+                  <div class="preview-top"><span>Olá, Samuel</span><b>Aluno</b></div>
+                  <div class="preview-heading"><small data-screen-label>VISÃO GERAL</small><h3 data-screen-title>Seu dia começa aqui</h3></div>
+                  <div class="preview-metrics" data-screen-content>
+                    <div class="metric metric-blue"><small>Próxima aula</small><strong>História</strong><span>10:50 · Sala 03</span></div>
+                    <div class="metric"><small>Progresso médio</small><strong>78%</strong><span>+12% neste bimestre</span></div>
+                    <div class="preview-chart"><small>Atividades da semana</small><div class="bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="device-caption"><span class="caption-dot"></span><span data-caption>Dashboard do aluno</span><span>•</span><span>Atualizado agora</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-navy profile-section" id="perfis">
+        <div class="shell">
+          <div class="center-heading light-heading"><p class="eyebrow eyebrow-light">PARA CADA PESSOA, UMA EXPERIÊNCIA</p><h2>Uma escola conectada começa por quem faz tudo acontecer.</h2></div>
+          <div class="profile-grid">
+            <article class="profile-card"><span class="profile-icon">01</span><h3>Aluno</h3><p>Notas, frequência, grade, atividades e Central de Estudos em uma rotina simples.</p></article>
+            <article class="profile-card"><span class="profile-icon">02</span><h3>Família</h3><p>Mais proximidade para acompanhar informações importantes da vida escolar.</p></article>
+            <article class="profile-card"><span class="profile-icon">03</span><h3>Professor</h3><p>Diário de classe, chamadas, avaliações, materiais e acompanhamento das turmas.</p></article>
+            <article class="profile-card"><span class="profile-icon">04</span><h3>Secretaria</h3><p>Cadastros, matrículas e documentos com menos etapas manuais no atendimento.</p></article>
+            <article class="profile-card"><span class="profile-icon">05</span><h3>Direção</h3><p>Uma visão organizada da instituição para decidir com mais segurança.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-light" id="diferenciais">
+        <div class="shell differentiator-grid">
+          <div class="differentiator-copy"><p class="eyebrow">ALÉM DA GESTÃO</p><h2>Ferramentas que aproximam a escola de verdade.</h2><p class="section-lead">O Tec Escola foi pensado para que a tecnologia reduza a distância entre informação, decisão e aprendizagem.</p><div class="differentiator-list"><div><b>TV Escola</b><span>Leve avisos e comunicados para os espaços da instituição.</span></div><div><b>Central de Estudos</b><span>Ajude o aluno a continuar aprendendo além da aula.</span></div><div><b>Personalização</b><span>Uma experiência digital com a identidade da sua escola.</span></div></div></div>
+          <div class="stacked-panels" aria-label="Recursos de destaque do Tec Escola"><div class="stack-panel panel-back"><span>IDENTIDADE DA ESCOLA</span><b>Seu sistema, do seu jeito.</b></div><div class="stack-panel panel-middle"><span>TV ESCOLA</span><b>Informação onde a comunidade está.</b></div><div class="stack-panel panel-front"><span>CENTRAL DE ESTUDOS</span><b>O próximo passo do aluno mais claro.</b><div class="panel-progress"><i></i><i></i><i></i></div></div></div>
+        </div>
+      </section>
+
+      <section class="section section-cyan proof-section">
+        <div class="shell proof-grid"><div><p class="eyebrow">FEITO PARA CRESCER COM A INSTITUIÇÃO</p><h2>Comece com clareza. Evolua com confiança.</h2></div><div class="proof-points"><div><strong>01</strong><p>Uma base acadêmica organizada para a rotina escolar.</p></div><div><strong>02</strong><p>Experiências próprias para cada perfil de acesso.</p></div><div><strong>03</strong><p>Integrações possíveis conforme o ambiente da instituição.</p></div></div></div>
+      </section>
+
+      <section class="section cta-section" id="cta">
+        <div class="shell cta-box"><div><p class="eyebrow eyebrow-light">TEC ESCOLA</p><h2>Pronto para conectar a sua escola?</h2><p>Converse com a gente e veja como a plataforma pode fazer sentido para a sua rotina.</p></div><div class="cta-actions"><a class="button button-primary" href="#demonstracao">Solicitar demonstração <span aria-hidden="true">↗</span></a><a class="button button-ghost" href="https://tecescola.grupotec.dev.br/login">Acessar plataforma</a></div></div>
+      </section>
+
+      <section class="section section-white faq-section" id="faq">
+        <div class="shell faq-grid"><div><p class="eyebrow">PERGUNTAS FREQUENTES</p><h2>O essencial, sem complicar.</h2></div><div class="faq-list"><details open><summary>O Tec Escola serve para quais instituições?</summary><p>A plataforma foi pensada para instituições de ensino que querem centralizar a gestão acadêmica e aproximar sua comunidade escolar.</p></details><details><summary>Os acessos mudam de acordo com o perfil?</summary><p>Sim. Alunos, responsáveis, professores, secretaria e direção acessam experiências e informações adequadas às suas permissões.</p></details><details><summary>É possível personalizar a identidade da escola?</summary><p>O projeto contempla personalização de marca e experiência de acesso conforme a configuração da instituição.</p></details></div></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid"><a class="brand brand-footer" href="#top"><span class="brand-logo-frame"><img class="brand-logo" src="./assets/logo-tec-escola.png" alt="" /></span><span><strong>Tec Escola</strong><small>GESTÃO ACADÊMICA</small></span></a><p>Tecnologia para conectar e transformar a educação.</p><div class="footer-links"><a href="#plataforma">Plataforma</a><a href="#diferenciais">Diferenciais</a><a href="#demonstracao">Demonstração</a><a href="https://tecescola.grupotec.dev.br/login">Acessar</a></div></div>
+      <div class="shell footer-bottom"><span>© 2026 Tec Escola. Todos os direitos reservados.</span><span>Uma plataforma feita para a rotina real da escola.</span></div>
+    </footer>
+    <script src="./script.js"></script>
+  </body>
+</html>
