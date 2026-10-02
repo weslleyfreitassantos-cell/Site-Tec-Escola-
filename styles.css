@@ -54,14 +54,14 @@ h3 { font-size: 21px; line-height: 1.1; }
 .site-header.is-scrolled .brand-logo { filter: none; }
 .site-footer .brand-logo { filter: brightness(0) invert(1); }
 .brand-mark { display: grid; width: 34px; height: 34px; place-items: center; border: 2px solid currentColor; border-radius: 8px; color: inherit; font-size: 10px; font-weight: 900; letter-spacing: -.08em; }
-.desktop-nav { display: flex; gap: 26px; margin-left: auto; margin-right: 34px; font-size: 12px; font-weight: 700; }
+.desktop-nav { display: flex; gap: 26px; margin-left: auto; margin-right: 34px; font-size: 14px; font-weight: 700; }
 .desktop-nav a, .text-link { opacity: .87; transition: opacity .2s ease, color .25s ease, transform .25s ease; }
 .desktop-nav a:hover, .text-link:hover { opacity: 1; }
-.desktop-nav a[data-differentials-nav] { position: relative; }
-.desktop-nav a[data-differentials-nav]::after { position: absolute; right: 0; bottom: -9px; left: 0; height: 2px; border-radius: 2px; background: var(--cyan); content: ""; transform: scaleX(0); transform-origin: right; transition: transform .3s ease; }
-.desktop-nav a[data-differentials-nav]:hover, .desktop-nav a[data-differentials-nav].is-hovered { color: var(--cyan); transform: translateY(-2px); }
-.desktop-nav a[data-differentials-nav]:hover::after, .desktop-nav a[data-differentials-nav].is-hovered::after { transform: scaleX(1); transform-origin: left; }
-.header-actions { display: flex; align-items: center; gap: 18px; font-size: 12px; font-weight: 800; }
+.desktop-nav a { position: relative; }
+.desktop-nav a::after { position: absolute; right: 0; bottom: -9px; left: 0; height: 2px; border-radius: 2px; background: var(--cyan); content: ""; transform: scaleX(0); transform-origin: right; transition: transform .3s ease; }
+.desktop-nav a:hover, .desktop-nav a:focus-visible { color: var(--cyan); transform: translateY(-2px); }
+.desktop-nav a:hover::after, .desktop-nav a:focus-visible::after { transform: scaleX(1); transform-origin: left; }
+.header-actions { display: flex; align-items: center; gap: 18px; font-size: 14px; font-weight: 800; }
 .menu-button { display: none; border: 0; background: none; color: currentColor; }
 .menu-button span { display: block; width: 22px; height: 2px; margin: 4px; background: currentColor; }
 
