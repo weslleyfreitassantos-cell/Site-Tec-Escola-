@@ -78,7 +78,7 @@ function setHeroSlide(nextIndex) {
 
 function restartHeroTimer() {
   window.clearInterval(heroTimer);
-  if (!reduceMotion && heroSlides.length > 1) heroTimer = window.setInterval(() => setHeroSlide(heroIndex + 1), 4200);
+  if (!reduceMotion && heroSlides.length > 1) heroTimer = window.setInterval(() => setHeroSlide(heroIndex + 1), 1000);
 }
 
 const phoneScenes = {
