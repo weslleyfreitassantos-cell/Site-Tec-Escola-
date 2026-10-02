@@ -82,9 +82,9 @@ function restartHeroTimer() {
 }
 
 const phoneScenes = {
-  dashboard: { src: './assets/phone-dashboard.jpeg', label: 'Painel do aluno', alt: 'Painel do aluno no celular' },
-  livros: { src: './assets/phone-livros.png', label: 'Central de livros', alt: 'Indicações de livros no celular' },
-  login: { src: './assets/phone-login.png', label: 'Acesso seguro', alt: 'Tela de acesso seguro no celular' },
+  dashboard: { src: './assets/phone-dashboard-cutout.png', label: 'Painel do aluno', alt: 'Painel do aluno no celular' },
+  livros: { src: './assets/phone-livros-cutout.png', label: 'Central de livros', alt: 'Indicações de livros no celular' },
+  login: { src: './assets/phone-login-cutout.png', label: 'Acesso seguro', alt: 'Tela de acesso seguro no celular' },
 };
 
 function setPhoneScene(name) {
@@ -114,7 +114,7 @@ function restartPhoneTimer() {
       const names = Object.keys(phoneScenes);
       const active = phoneTabs.findIndex((tab) => tab.classList.contains('is-active'));
       setPhoneScene(names[(active + 1) % names.length]);
-    }, 4600);
+    }, 1000);
   }
 }
 

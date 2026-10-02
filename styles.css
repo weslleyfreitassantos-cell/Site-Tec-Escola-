@@ -163,11 +163,10 @@ h3 { font-size: 21px; line-height: 1.1; }
 .mobile-experience { overflow: hidden; background: #0c2b83; }
 .mobile-grid { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 100px; }
 .phone-stage { position: relative; display: grid; min-height: 530px; place-items: center; }
-.phone-device { position: relative; z-index: 2; width: min(286px, 70%); border: 7px solid #111827; border-radius: 39px; background: #111827; box-shadow: 0 28px 70px rgba(2, 10, 45, .45), 0 0 0 1px rgba(168,241,244,.35); transform: rotate(5deg) translateY(4px); animation: phone-float 5.8s ease-in-out infinite; transition: transform .5s ease, box-shadow .5s ease; }
-.phone-device:hover { transform: rotate(1deg) translateY(-9px) scale(1.025); box-shadow: 0 35px 80px rgba(2, 10, 45, .5), 0 0 0 1px rgba(168,241,244,.62); }
-.phone-device img { display: block; width: 100%; aspect-ratio: 521 / 946; border-radius: 31px; object-fit: cover; }
-.phone-speaker { position: absolute; z-index: 3; top: 11px; left: 50%; width: 74px; height: 17px; border-radius: 20px; background: #05070d; transform: translateX(-50%); }
-.phone-shine { position: absolute; z-index: 4; inset: 4% 7% 4% 58%; border-radius: 32px; background: linear-gradient(110deg, transparent 14%, rgba(255,255,255,.17) 40%, transparent 66%); pointer-events: none; }
+.phone-device { position: relative; z-index: 2; width: min(286px, 70%); border: 0; border-radius: 0; background: transparent; box-shadow: none; transform: rotate(5deg) translateY(4px); animation: phone-float 5.8s ease-in-out infinite; transition: transform .5s ease; }
+.phone-device:hover { transform: rotate(1deg) translateY(-9px) scale(1.025); box-shadow: none; }
+.phone-device img { display: block; width: 100%; aspect-ratio: 521 / 946; border-radius: 0; object-fit: contain; }
+.phone-speaker, .phone-shine { display: none; }
 .phone-orbit { position: absolute; border: 1px solid rgba(168,241,244,.32); border-radius: 50%; transform: rotate(-18deg); }
 .phone-orbit-one { width: 420px; height: 210px; }
 .phone-orbit-two { width: 330px; height: 460px; border-color: rgba(44,120,255,.36); transform: rotate(34deg); }
