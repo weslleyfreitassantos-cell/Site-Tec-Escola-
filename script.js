@@ -46,7 +46,7 @@ const screens = {
 };
 
 function updateHeader() {
-  header?.classList.toggle('is-scrolled', window.scrollY > 24);
+  header?.classList.toggle('is-scrolled', window.scrollY > 24 && !header.classList.contains('menu-open'));
 }
 
 function updateScrollMotion() {
@@ -149,6 +149,7 @@ if (menuButton && header) {
   menuButton.addEventListener('click', () => {
     const isOpen = header.classList.toggle('menu-open');
     menuButton.setAttribute('aria-expanded', String(isOpen));
+    updateHeader();
   });
   header.querySelectorAll('.desktop-nav a').forEach((link) => link.addEventListener('click', () => {
     header.classList.remove('menu-open');
