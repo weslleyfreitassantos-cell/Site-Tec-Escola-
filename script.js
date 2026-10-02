@@ -14,8 +14,6 @@ const heroImages = [...document.querySelectorAll('.hero-slide img')];
 const backdrop = document.querySelector('.person-backdrop');
 const phoneImage = document.querySelector('[data-phone-image]');
 const phoneTabs = [...document.querySelectorAll('[data-phone-tab]')];
-const phoneLabel = document.querySelector('[data-phone-label]');
-const phoneCounter = document.querySelector('[data-phone-counter]');
 const phoneStage = document.querySelector('.phone-stage');
 const phoneDevice = document.querySelector('.phone-device');
 const navLinks = [...document.querySelectorAll('.desktop-nav a')];
@@ -110,16 +108,14 @@ function restartHeroTimer() {
 }
 
 const phoneScenes = {
-  dashboard: { src: './assets/phone-dashboard-cutout.png', label: 'Painel do aluno', alt: 'Painel do aluno no celular' },
-  livros: { src: './assets/phone-livros-cutout.png', label: 'Central de livros', alt: 'Indicações de livros no celular' },
-  login: { src: './assets/phone-login-cutout.png', label: 'Acesso seguro', alt: 'Tela de acesso seguro no celular' },
+  dashboard: { src: './assets/phone-dashboard-cutout.png', alt: 'Painel do aluno no celular' },
+  livros: { src: './assets/phone-livros-cutout.png', alt: 'Indicações de livros no celular' },
+  login: { src: './assets/phone-login-cutout.png', alt: 'Tela de acesso seguro no celular' },
 };
 
 function setPhoneScene(name) {
   const scene = phoneScenes[name];
   if (!scene || !phoneImage) return;
-  const names = Object.keys(phoneScenes);
-  const sceneIndex = names.indexOf(name);
   phoneTabs.forEach((tab) => {
     const isActive = tab.dataset.phoneTab === name;
     tab.classList.toggle('is-active', isActive);
@@ -133,8 +129,6 @@ function setPhoneScene(name) {
     phoneImage.alt = scene.alt;
     phoneImage.classList.remove('is-changing');
   }, reduceMotion ? 0 : 180);
-  if (phoneLabel) phoneLabel.textContent = scene.label;
-  if (phoneCounter) phoneCounter.textContent = `${String(sceneIndex + 1).padStart(2, '0')} / ${String(names.length).padStart(2, '0')}`;
 }
 
 function restartPhoneTimer() {

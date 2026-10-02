@@ -197,8 +197,6 @@ h3 { font-size: 21px; line-height: 1.1; }
 .phone-tab { display: flex; min-height: 48px; align-items: center; justify-content: space-between; border: 1px solid rgba(168,241,244,.28); border-radius: 8px; padding: 0 16px; color: #d3e1fb; background: rgba(255,255,255,.06); cursor: pointer; font-size: 13px; font-weight: 800; text-align: left; transition: transform .25s ease, color .25s ease, background .25s ease, border-color .25s ease; }
 .phone-tab::after { color: var(--cyan); content: "↗"; opacity: .8; }
 .phone-tab:hover, .phone-tab.is-active { border-color: var(--cyan); color: var(--navy); background: var(--cyan); transform: translateX(7px); }
-.phone-status { display: flex; align-items: center; gap: 9px; margin-top: 18px; color: #a9bee5; font-size: 11px; }
-.phone-status [data-phone-counter] { margin-left: auto; color: #d4e5ff; font-weight: 800; letter-spacing: .08em; }
 @keyframes phone-float { 0%, 100% { transform: rotate(5deg) translate3d(0, 4px, 0); } 50% { transform: rotate(2deg) translate3d(0, -10px, 0); } }
 @keyframes orbit-drift-one { 0%, 100% { transform: translate3d(-10px, 2px, 0) rotate(-18deg); } 50% { transform: translate3d(13px, -13px, 0) rotate(-10deg); } }
 @keyframes orbit-drift-two { 0%, 100% { transform: translate3d(10px, -4px, 0) rotate(34deg); } 50% { transform: translate3d(-14px, 14px, 0) rotate(42deg); } }
