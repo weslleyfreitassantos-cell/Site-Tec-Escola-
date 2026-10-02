@@ -17,6 +17,7 @@ const phoneTabs = [...document.querySelectorAll('[data-phone-tab]')];
 const phoneLabel = document.querySelector('[data-phone-label]');
 const phoneCounter = document.querySelector('[data-phone-counter]');
 const phoneStage = document.querySelector('.phone-stage');
+const phoneDevice = document.querySelector('.phone-device');
 const dashboardMotion = document.querySelector('[data-dashboard-motion]');
 const dashboardMotionRing = dashboardMotion?.querySelector('[data-motion-ring]');
 const dashboardMotionFrequency = dashboardMotion?.querySelector('[data-motion-frequency]');
@@ -140,6 +141,7 @@ function setPhoneScene(name) {
   });
   phoneImage.classList.add('is-changing');
   phoneImage.dataset.phoneScene = name;
+  if (phoneDevice) phoneDevice.dataset.phoneScene = name;
   window.setTimeout(() => {
     phoneImage.src = scene.src;
     phoneImage.alt = scene.alt;
