@@ -48,6 +48,18 @@ whatsappLink?.addEventListener('click', (event) => {
   whatsappLink.href = `https://web.whatsapp.com/send?phone=${whatsappNumber}`;
 });
 
+const footerSocials = document.querySelector('.footer-socials');
+if (footerSocials && !footerSocials.querySelector('[data-youtube-placeholder]')) {
+  const youtubePlaceholder = document.createElement('span');
+  youtubePlaceholder.className = 'social-link social-link-placeholder';
+  youtubePlaceholder.dataset.youtubePlaceholder = '';
+  youtubePlaceholder.setAttribute('role', 'img');
+  youtubePlaceholder.setAttribute('aria-label', 'YouTube da Tec Escola, canal em breve');
+  youtubePlaceholder.title = 'Canal no YouTube em breve';
+  youtubePlaceholder.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8z"></path><path class="social-play" d="m9.6 8.3 6.3 3.7-6.3 3.7z"></path></svg>';
+  footerSocials.append(youtubePlaceholder);
+}
+
 function setActiveNav(link) {
   navLinks.forEach((navLink) => {
     const isActive = navLink === link;
