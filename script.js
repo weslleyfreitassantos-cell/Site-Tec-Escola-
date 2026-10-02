@@ -34,13 +34,18 @@ let heroTimer;
 let phoneTimer;
 let dashboardMotionFrame;
 
-const whatsappNumber = (whatsappLink?.dataset.whatsappNumber || '').replace(/\D/g, '');
+const whatsappNumber = (whatsappLink?.dataset.whatsappNumber || '5571987336205').replace(/\D/g, '');
+if (whatsappLink && whatsappNumber) {
+  whatsappLink.href = `https://web.whatsapp.com/send?phone=${whatsappNumber}`;
+  whatsappLink.target = '_blank';
+  whatsappLink.rel = 'noopener noreferrer';
+}
 whatsappLink?.addEventListener('click', (event) => {
   if (!whatsappNumber) {
     event.preventDefault();
     return;
   }
-  whatsappLink.href = `https://wa.me/${whatsappNumber}`;
+  whatsappLink.href = `https://web.whatsapp.com/send?phone=${whatsappNumber}`;
 });
 
 function setActiveNav(link) {
