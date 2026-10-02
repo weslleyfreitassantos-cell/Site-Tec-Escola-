@@ -17,12 +17,22 @@ const phoneTabs = [...document.querySelectorAll('[data-phone-tab]')];
 const phoneLabel = document.querySelector('[data-phone-label]');
 const phoneCounter = document.querySelector('[data-phone-counter]');
 const phoneStage = document.querySelector('.phone-stage');
+const navLinks = [...document.querySelectorAll('.desktop-nav a')];
 const differentialsNav = document.querySelector('[data-differentials-nav]');
 const differentialsSection = document.querySelector('#diferenciais');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let heroIndex = 0;
 let heroTimer;
 let phoneTimer;
+
+function setActiveNav(link) {
+  navLinks.forEach((navLink) => {
+    const isActive = navLink === link;
+    navLink.classList.toggle('is-active', isActive);
+    if (isActive) navLink.setAttribute('aria-current', 'page');
+    else navLink.removeAttribute('aria-current');
+  });
+}
 
 const screens = {
   dashboard: {
@@ -139,6 +149,9 @@ phoneTabs.forEach((tab) => tab.addEventListener('click', () => {
 }));
 phoneStage?.addEventListener('mouseenter', () => window.clearInterval(phoneTimer));
 phoneStage?.addEventListener('mouseleave', restartPhoneTimer);
+
+navLinks.forEach((link) => link.addEventListener('click', () => setActiveNav(link)));
+setActiveNav(navLinks.find((link) => link.getAttribute('href') === window.location.hash));
 
 differentialsNav?.addEventListener('mouseenter', () => differentialsSection?.classList.add('is-previewing'));
 differentialsNav?.addEventListener('mouseleave', () => differentialsSection?.classList.remove('is-previewing'));
