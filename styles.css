@@ -208,10 +208,10 @@ h3 { font-size: 21px; line-height: 1.1; }
 
 .center-heading { max-width: 690px; margin: 0 auto 58px; text-align: center; }
 .light-heading h2 { color: white; }
-.profile-section { position: relative; isolation: isolate; overflow: hidden; background: #071c58; }
-.profile-section::before { position: absolute; inset: 0; z-index: 0; width: 100%; background: url("./assets/alunos-app-hero.png?v=profiles-full-photo") center center / cover no-repeat; content: ""; opacity: .94; }
-.profile-section::after { position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(7,28,88,.08) 0%, rgba(7,28,88,.12) 35%, rgba(7,28,88,.58) 51%, rgba(7,28,88,.82) 69%, rgba(7,28,88,.86) 100%); content: ""; pointer-events: none; }
-.profile-shell { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); align-items: center; gap: clamp(36px, 5vw, 80px); min-height: 700px; }
+.profile-section { position: relative; isolation: isolate; overflow: hidden; padding: clamp(64px, 6.2vw, 88px) 0; background: #071c58; }
+.profile-section::before { position: absolute; inset: 0 auto 0 0; z-index: 0; width: min(86%, 1480px); background: url("./assets/alunos-app-hero.png?v=profiles-full-photo") center center / cover no-repeat; content: ""; opacity: .94; }
+.profile-section::after { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(7,28,88,.03) 0%, rgba(7,28,88,.08) 40%, rgba(7,28,88,.48) 51%, rgba(7,28,88,.86) 64%, #071c58 74%, #071c58 100%), linear-gradient(90deg, rgba(7,28,88,.03) 0%, rgba(7,28,88,.16) 42%, rgba(7,28,88,.78) 72%, rgba(7,28,88,.94) 100%); content: ""; pointer-events: none; }
+.profile-shell { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); align-items: center; gap: clamp(36px, 5vw, 80px); min-height: 560px; }
 .profile-section .center-heading { grid-column: 2; max-width: 650px; margin: 0 0 34px; text-align: left; }
 .profile-section .center-heading h2 { max-width: 650px; }
 .profile-grid { display: grid; grid-column: 2; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
@@ -256,7 +256,7 @@ h3 { font-size: 21px; line-height: 1.1; }
   .showcase-grid { gap: clamp(36px, 5vw, 70px); }
   .director-dashboard-frame, .director-dashboard-image { min-height: 500px; }
   .demo-section { z-index: 3; }
-  .profile-shell { grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: clamp(30px, 4vw, 60px); min-height: 640px; }
+  .profile-shell { grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: clamp(30px, 4vw, 60px); min-height: 560px; }
   .profile-section::before { width: 100%; }
 }
 @media (max-width: 760px) {
