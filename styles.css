@@ -86,7 +86,7 @@ h3 { font-size: 21px; line-height: 1.1; }
 .note-top { top: 20%; left: -7%; animation: float-note-a 5.6s ease-in-out infinite; }
 .note-middle { top: 50%; right: -4%; animation: float-note-b 6.4s ease-in-out -1.4s infinite; }
 .note-bottom { bottom: 14%; left: 4%; animation: float-note-a 5.1s ease-in-out -2.2s infinite; }
-.demo-form { width: 100%; max-width: 360px; justify-self: end; border: 1px solid rgba(255,255,255,.28); border-radius: 8px; padding: 28px; color: var(--ink); background: rgba(255,255,255,.97); box-shadow: 0 24px 80px rgba(4, 20, 82, .25); }
+.demo-form { width: 100%; max-width: 360px; justify-self: end; border: 1px solid rgba(255,255,255,.28); border-radius: 40px; padding: 28px; color: var(--ink); background: rgba(255,255,255,.97); box-shadow: 0 24px 80px rgba(4, 20, 82, .25); }
 .form-heading h2 { margin-bottom: 10px; font-size: 28px; }
 .form-heading p:last-child { color: var(--muted); font-size: 13px; line-height: 1.5; }
 .demo-form label { display: block; margin-top: 13px; color: var(--ink); font-size: 11px; font-weight: 800; }
