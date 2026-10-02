@@ -217,7 +217,7 @@ const revealObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: .12 });
 
-const revealItems = document.querySelectorAll('.section:not(.hero) h2, .feature-card, .showcase-step, .profile-card, .differentiator-copy, .stacked-panels, .proof-points div, .faq-list details, .phone-stage, .mobile-copy');
+const revealItems = document.querySelectorAll('.section:not(.hero) h2, .feature-card, .showcase-step, .profile-card, .differentiator-copy, .stacked-panels, .phone-stage, .mobile-copy');
 revealItems.forEach((item, index) => {
   item.classList.add('reveal');
   item.style.setProperty('--reveal-delay', `${Math.min(index % 5, 4) * 70}ms`);
