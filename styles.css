@@ -13,6 +13,7 @@
   color: var(--ink);
   background: var(--pale);
   scroll-behavior: smooth;
+  scroll-padding-top: 96px;
 }
 
 * { box-sizing: border-box; }
@@ -68,7 +69,7 @@ h3 { font-size: 21px; line-height: 1.1; }
 .menu-button span { display: block; width: 22px; height: 2px; margin: 4px; background: currentColor; }
 
 .hero { position: relative; min-height: 0; overflow: hidden; padding: clamp(124px, 12vw, 158px) 0 0; background: #2946d2; }
-.hero::before { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.065) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.065) 1px, transparent 1px); background-size: 68px 68px; opacity: .3; content: ""; }
+.hero::before { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.065) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.065) 1px, transparent 1px); background-size: 68px 68px; opacity: .3; pointer-events: none; content: ""; }
 .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr); align-items: stretch; gap: clamp(24px, 4vw, 48px); padding-bottom: clamp(48px, 5vw, 76px); }
 .hero-copy { position: relative; z-index: 2; padding: 0; }
 .hero-lead { max-width: 520px; color: rgba(255,255,255,.83); font-size: clamp(16px, 1.5vw, 18px); line-height: 1.55; }
@@ -95,7 +96,7 @@ h3 { font-size: 21px; line-height: 1.1; }
 .demo-copy > p:not(.eyebrow) { max-width: 480px; color: rgba(255,255,255,.84); font-size: 18px; line-height: 1.55; }
 .demo-copy-points { display: grid; gap: 12px; margin-top: 30px; color: #d7ffff; font-size: 13px; font-weight: 800; }
 .demo-copy-points span::before { margin-right: 9px; color: var(--cyan); content: "✓"; font-size: 16px; }
-.demo-form { width: 100%; max-width: 540px; flex: 0 1 540px; border: 0; border-radius: 22px; padding: 38px 42px; color: var(--ink); background: rgba(255,255,255,.97); box-shadow: 0 20px 52px rgba(4, 20, 82, .24); }
+.demo-form { width: 100%; max-width: 540px; flex: 0 1 540px; scroll-margin-top: 96px; border: 0; border-radius: 22px; padding: 38px 42px; color: var(--ink); background: rgba(255,255,255,.97); box-shadow: 0 20px 52px rgba(4, 20, 82, .24); }
 .form-heading h2 { margin-bottom: 12px; font-size: 32px; }
 .form-heading p:last-child { color: var(--muted); font-size: 14px; line-height: 1.55; }
 .demo-form label { display: block; margin-top: 16px; color: var(--ink); font-size: 12px; font-weight: 800; }
@@ -207,7 +208,7 @@ h3 { font-size: 21px; line-height: 1.1; }
 .center-heading { max-width: 690px; margin: 0 auto 58px; text-align: center; }
 .light-heading h2 { color: white; }
 .profile-section { position: relative; isolation: isolate; overflow: hidden; padding: clamp(64px, 6.2vw, 88px) 0; background: #071c58; }
-.profile-section::before { position: absolute; inset: 0 auto 0 0; z-index: 0; width: min(86%, 1480px); background: url("./assets/alunos-app-hero.png?v=profiles-full-photo") center center / cover no-repeat; content: ""; opacity: .94; }
+.profile-section::before { position: absolute; inset: 0; z-index: 0; width: 100%; background: url("./assets/alunos-app-hero.png?v=profiles-full-photo") center center / cover no-repeat; content: ""; opacity: .94; pointer-events: none; }
 .profile-section::after { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(7,28,88,.03) 0%, rgba(7,28,88,.08) 40%, rgba(7,28,88,.48) 51%, rgba(7,28,88,.86) 64%, #071c58 74%, #071c58 100%), linear-gradient(90deg, rgba(7,28,88,.03) 0%, rgba(7,28,88,.16) 42%, rgba(7,28,88,.78) 72%, rgba(7,28,88,.94) 100%); content: ""; pointer-events: none; }
 .profile-shell { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); align-items: center; gap: clamp(36px, 5vw, 80px); min-height: 560px; }
 .profile-section .center-heading { grid-column: 2; max-width: 650px; margin: 0 0 34px; text-align: left; }
