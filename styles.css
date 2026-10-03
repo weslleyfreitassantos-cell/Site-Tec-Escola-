@@ -209,7 +209,7 @@ h3 { font-size: 21px; line-height: 1.1; }
 .light-heading h2 { color: white; }
 .profile-section { position: relative; isolation: isolate; overflow: hidden; padding: clamp(64px, 6.2vw, 88px) 0; background: #071c58; }
 .profile-section::before { position: absolute; inset: 0; z-index: 0; width: 100%; background: url("./assets/alunos-app-hero.png?v=profiles-full-photo") center center / cover no-repeat; content: ""; opacity: .94; pointer-events: none; }
-.profile-section::after { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(7,28,88,.03) 0%, rgba(7,28,88,.08) 40%, rgba(7,28,88,.48) 51%, rgba(7,28,88,.86) 64%, #071c58 74%, #071c58 100%), linear-gradient(90deg, rgba(7,28,88,.03) 0%, rgba(7,28,88,.16) 42%, rgba(7,28,88,.78) 72%, rgba(7,28,88,.94) 100%); content: ""; pointer-events: none; }
+.profile-section::after { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(7,28,88,.03) 0%, rgba(7,28,88,.06) 40%, rgba(7,28,88,.28) 51%, rgba(7,28,88,.58) 64%, rgba(7,28,88,.72) 74%, rgba(7,28,88,.78) 100%), linear-gradient(90deg, rgba(7,28,88,.03) 0%, rgba(7,28,88,.10) 42%, rgba(7,28,88,.58) 72%, rgba(7,28,88,.78) 100%); content: ""; pointer-events: none; }
 .profile-shell { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); align-items: center; gap: clamp(36px, 5vw, 80px); min-height: 560px; }
 .profile-section .center-heading { grid-column: 2; max-width: 650px; margin: 0 0 34px; text-align: left; }
 .profile-section .center-heading h2 { max-width: 650px; }
