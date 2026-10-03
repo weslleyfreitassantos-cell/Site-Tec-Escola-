@@ -45,11 +45,11 @@ h3 { font-size: 21px; line-height: 1.1; }
 .button-light { color: var(--navy); background: var(--white); }
 .button-small { min-height: 40px; padding: 0 15px; font-size: 12px; }
 
-.site-header { position: fixed; z-index: 20; top: 0; right: 0; left: 0; display: flex; height: 78px; align-items: center; justify-content: space-between; padding: 0 max(24px, calc((100vw - 1180px) / 2)); color: var(--white); transition: background .25s ease, box-shadow .25s ease, color .25s ease; }
+.site-header { position: fixed; z-index: 20; top: 0; right: 0; left: 0; display: flex; height: 78px; align-items: center; justify-content: space-between; padding: 0 max(24px, calc((100vw - 1400px) / 2)); color: var(--white); transition: background .25s ease, box-shadow .25s ease, color .25s ease; }
 .site-header.is-scrolled { color: var(--ink); background: rgba(255,255,255,.92); box-shadow: 0 8px 24px rgba(7, 26, 75, .08); backdrop-filter: blur(16px); }
 .brand { display: inline-flex; align-items: center; gap: 10px; }
-.brand strong { display: block; font-size: 18px; letter-spacing: -.04em; }
-.brand small { display: block; margin-top: 2px; font-size: 8px; font-weight: 800; letter-spacing: .2em; opacity: .68; }
+.brand strong { display: block; font-size: 22px; letter-spacing: -.04em; }
+.brand small { display: block; margin-top: 2px; font-size: 9px; font-weight: 800; letter-spacing: .2em; opacity: .68; }
 .brand-logo-frame { position: relative; display: block; width: 42px; height: 36px; overflow: hidden; flex: 0 0 42px; }
 .brand-logo { position: absolute; top: -9px; left: -19px; width: 90px; height: 52px; max-width: none; object-fit: contain; filter: brightness(0) invert(1); transition: filter .25s ease; }
 .site-header.is-scrolled .brand-logo { filter: none; }
@@ -68,13 +68,13 @@ h3 { font-size: 21px; line-height: 1.1; }
 .menu-button { display: none; border: 0; background: none; color: currentColor; }
 .menu-button span { display: block; width: 22px; height: 2px; margin: 4px; background: currentColor; }
 
-.hero { position: relative; min-height: 0; overflow: hidden; padding: clamp(124px, 12vw, 158px) 0 0; background: #2946d2; }
+.hero { position: relative; display: flex; min-height: 100svh; flex-direction: column; justify-content: center; overflow: hidden; padding: clamp(110px, 11vh, 150px) 0 clamp(28px, 5vh, 60px); background: #2946d2; }
 .hero::before { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.065) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.065) 1px, transparent 1px); background-size: 68px 68px; opacity: .3; pointer-events: none; content: ""; }
-.hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr); align-items: stretch; gap: clamp(24px, 4vw, 48px); padding-bottom: clamp(48px, 5vw, 76px); }
+.hero-grid { position: relative; z-index: 1; display: grid; width: min(1400px, calc(100% - clamp(32px, 5vw, 48px))); min-height: 0; flex: 1; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); align-items: center; gap: clamp(28px, 3.5vw, 58px); padding-bottom: 0; }
 .hero-copy { position: relative; z-index: 2; padding: 0; }
 .hero-lead { max-width: 520px; color: rgba(255,255,255,.83); font-size: clamp(16px, 1.5vw, 18px); line-height: 1.55; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: clamp(22px, 2.5vw, 32px); }
-.hero-proof { display: flex; flex-wrap: wrap; gap: clamp(10px, 1.8vw, 16px); margin-top: clamp(20px, 2.5vw, 28px); color: rgba(255,255,255,.82); font-size: 11px; font-weight: 700; }
+.hero-proof { display: flex; flex-wrap: wrap; gap: clamp(10px, 1.8vw, 16px); margin-top: clamp(20px, 2.5vw, 28px); color: rgba(255,255,255,.82); font-size: clamp(12px, 1.1vw, 14px); font-weight: 700; }
 .hero-proof b { color: var(--cyan); font-size: 16px; vertical-align: -1px; }
 .hero-person { --hero-bleed: clamp(26px, 4vw, 72px); --hero-shift-x: clamp(4px, 1.5vw, 24px); position: relative; grid-column: 2; align-self: stretch; width: calc(100% + var(--hero-bleed)); margin-right: calc(var(--hero-bleed) * -1); aspect-ratio: auto; min-height: 0; isolation: isolate; transform: translate3d(var(--hero-shift-x), var(--person-shift, 0px), 0); will-change: transform; }
 .person-backdrop { position: absolute; z-index: -1; right: 3%; bottom: 0; width: 92%; height: 100%; border-radius: 30px; background: linear-gradient(180deg, rgba(111,228,247,.45), rgba(16,47,174,.2)); transform: translateY(var(--backdrop-lift, 0px)); transition: transform .2s ease-out; }
