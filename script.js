@@ -33,17 +33,10 @@ const getWhatsappUrl = (message = '') => {
 };
 
 if (whatsappLink && whatsappNumber) {
-  whatsappLink.href = `https://web.whatsapp.com/send?phone=${whatsappNumber}`;
+  whatsappLink.href = getWhatsappUrl();
   whatsappLink.target = '_blank';
   whatsappLink.rel = 'noopener noreferrer';
 }
-whatsappLink?.addEventListener('click', (event) => {
-  if (!whatsappNumber) {
-    event.preventDefault();
-    return;
-  }
-  whatsappLink.href = `https://web.whatsapp.com/send?phone=${whatsappNumber}`;
-});
 
 const footerSocials = document.querySelector('.footer-socials');
 if (footerSocials && !footerSocials.querySelector('[data-youtube-placeholder]')) {
