@@ -26,18 +26,17 @@ let heroTimer;
 let phoneTimer;
 
 const whatsappNumber = (whatsappLink?.dataset.whatsappNumber || '5571987336205').replace(/\D/g, '');
+const getWhatsappUrl = (message = '') => {
+  if (!whatsappNumber) return '';
+  const url = `https://wa.me/${whatsappNumber}`;
+  return message ? `${url}?text=${encodeURIComponent(message)}` : url;
+};
+
 if (whatsappLink && whatsappNumber) {
-  whatsappLink.href = `https://web.whatsapp.com/send?phone=${whatsappNumber}`;
+  whatsappLink.href = getWhatsappUrl();
   whatsappLink.target = '_blank';
   whatsappLink.rel = 'noopener noreferrer';
 }
-whatsappLink?.addEventListener('click', (event) => {
-  if (!whatsappNumber) {
-    event.preventDefault();
-    return;
-  }
-  whatsappLink.href = `https://web.whatsapp.com/send?phone=${whatsappNumber}`;
-});
 
 const footerSocials = document.querySelector('.footer-socials');
 if (footerSocials && !footerSocials.querySelector('[data-youtube-placeholder]')) {
@@ -218,8 +217,46 @@ revealItems.forEach((item, index) => {
   revealObserver.observe(item);
 });
 
+demoForm?.addEventListener('input', (event) => {
+  if (event.target instanceof HTMLInputElement || event.target instanceof HTMLSelectElement) {
+    event.target.removeAttribute('aria-invalid');
+  }
+});
+
 demoForm?.addEventListener('submit', (event) => {
   event.preventDefault();
-  formStatus.textContent = 'Formulário pronto para conectar ao canal de atendimento da Tec Escola.';
-  demoForm.reset();
+
+  const requiredFields = [...demoForm.querySelectorAll('[required]')];
+  const invalidField = requiredFields.find((field) => {
+    const value = field.value.trim();
+    const invalidEmail = field.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    return !value || invalidEmail;
+  });
+
+  requiredFields.forEach((field) => field.removeAttribute('aria-invalid'));
+  if (invalidField) {
+    invalidField.setAttribute('aria-invalid', 'true');
+    formStatus.textContent = 'Preencha todos os campos obrigatórios para continuar.';
+    invalidField.focus();
+    return;
+  }
+
+  if (!whatsappNumber) {
+    formStatus.textContent = 'Não foi possível abrir o canal de atendimento. Tente novamente mais tarde.';
+    return;
+  }
+
+  const data = new FormData(demoForm);
+  const message = [
+    'Olá! Gostaria de solicitar uma demonstração do Tec Escola.',
+    '',
+    `Instituição: ${data.get('institution')}`,
+    `Nome: ${data.get('name')}`,
+    `E-mail profissional: ${data.get('email')}`,
+    `WhatsApp: ${data.get('phone')}`,
+    `Cargo: ${data.get('role')}`,
+  ].join('\n');
+
+  formStatus.textContent = 'Abrindo o WhatsApp para concluir o atendimento...';
+  window.location.assign(getWhatsappUrl(message));
 });
