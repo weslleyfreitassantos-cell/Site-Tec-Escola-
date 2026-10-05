@@ -20,6 +20,8 @@ const navLinks = [...document.querySelectorAll('.desktop-nav a')];
 const tvSchoolSlides = [...document.querySelectorAll('[data-tv-school-slide]')];
 const tvSchoolDots = [...document.querySelectorAll('[data-tv-school-dot]')];
 const tvSchoolVideos = [...document.querySelectorAll('[data-tv-school-video]')];
+const tvSchoolStage = document.querySelector('.tv-school-stage');
+const tvSchoolToggle = document.querySelector('[data-tv-school-toggle]');
 const differentialsNav = document.querySelector('[data-differentials-nav]');
 const differentialsSection = document.querySelector('#diferenciais');
 const whatsappLink = document.querySelector('[data-whatsapp-link]');
@@ -28,6 +30,7 @@ let heroIndex = 0;
 let heroTimer;
 let phoneTimer;
 let tvSchoolTimer;
+let tvSchoolPaused = false;
 
 const whatsappNumber = (whatsappLink?.dataset.whatsappNumber || '5571987336205').replace(/\D/g, '');
 const getWhatsappUrl = (message = '') => {
@@ -159,7 +162,7 @@ function setTvSchoolSlide(nextIndex) {
     dot.setAttribute('aria-pressed', String(isActive));
   });
   const activeVideo = tvSchoolSlides[activeIndex].querySelector('[data-tv-school-video]');
-  if (activeVideo) activeVideo.play().catch(() => {});
+  if (activeVideo && !tvSchoolPaused) activeVideo.play().catch(() => {});
 }
 
 function restartTvSchoolTimer() {
@@ -171,6 +174,24 @@ function restartTvSchoolTimer() {
     setTvSchoolSlide(activeIndex + 1);
     restartTvSchoolTimer();
   }, 3000);
+}
+
+function setTvSchoolPaused(paused) {
+  tvSchoolPaused = paused;
+  tvSchoolStage?.classList.toggle('is-paused', paused);
+  tvSchoolToggle?.setAttribute('aria-pressed', String(paused));
+  tvSchoolToggle?.setAttribute('aria-label', paused ? 'Retomar carrossel da TV Escola' : 'Pausar carrossel da TV Escola');
+  tvSchoolToggle?.setAttribute('title', paused ? 'Retomar carrossel da TV Escola' : 'Pausar carrossel da TV Escola');
+
+  const activeVideo = tvSchoolSlides.find((slide) => slide.classList.contains('is-active'))?.querySelector('[data-tv-school-video]');
+  if (paused) {
+    window.clearTimeout(tvSchoolTimer);
+    activeVideo?.pause();
+    return;
+  }
+
+  if (activeVideo) activeVideo.play().catch(() => {});
+  restartTvSchoolTimer();
 }
 
 function setScreen(name) {
@@ -210,8 +231,18 @@ phoneStage?.addEventListener('mouseleave', restartPhoneTimer);
 
 tvSchoolDots.forEach((dot) => dot.addEventListener('click', () => {
   setTvSchoolSlide(Number(dot.dataset.tvSchoolDot));
-  restartTvSchoolTimer();
+  if (!tvSchoolPaused) restartTvSchoolTimer();
 }));
+
+tvSchoolToggle?.addEventListener('click', (event) => {
+  event.stopPropagation();
+  setTvSchoolPaused(!tvSchoolPaused);
+});
+
+tvSchoolStage?.addEventListener('click', (event) => {
+  if (event.target.closest('[data-tv-school-dot], [data-tv-school-toggle]')) return;
+  setTvSchoolPaused(!tvSchoolPaused);
+});
 
 tvSchoolVideos.forEach((video) => video.addEventListener('ended', () => {
   const activeIndex = tvSchoolSlides.findIndex((slide) => slide.classList.contains('is-active'));
