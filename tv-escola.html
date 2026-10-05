@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=tv-escola-28" />
+    <link rel="stylesheet" href="./styles.css?v=tv-escola-29" />
   </head>
   <body class="tv-school-detail-page">
     <header class="site-header is-scrolled" data-header>
@@ -53,15 +53,15 @@
 
           <div class="tv-school-detail-grid">
             <article class="tv-school-detail-card">
-              <div class="tv-school-detail-media"><img src="./assets/tv-escola-cardapio.png?v=tv-escola-27" alt="TV Escola exibindo o cardápio da cantina e uma homenagem à professora Fátima" /></div>
+              <div class="tv-school-detail-media"><img src="./assets/tv-escola-cardapio.png?v=tv-escola-29" alt="TV Escola exibindo o cardápio da cantina e uma homenagem à professora Fátima" /></div>
               <div class="tv-school-detail-card-copy"><h3>Informações da cantina</h3><p>Mostre cardápios, horários e homenagens com uma apresentação bonita e sempre atual.</p></div>
             </article>
             <article class="tv-school-detail-card">
-              <div class="tv-school-detail-media"><img src="./assets/tv-escola-semana-livro.png?v=tv-escola-27" alt="TV Escola exibindo um aviso sobre a Semana do Livro" /></div>
+              <div class="tv-school-detail-media"><img src="./assets/tv-escola-semana-livro.png?v=tv-escola-29" alt="TV Escola exibindo um aviso sobre a Semana do Livro" /></div>
               <div class="tv-school-detail-card-copy"><h3>Eventos escolares</h3><p>Divulgue semanas temáticas, reuniões, campanhas e tudo o que movimenta a escola.</p></div>
             </article>
-            <article class="tv-school-detail-card">
-              <div class="tv-school-detail-media"><video src="./assets/tv-escola-video.mp4?v=tv-escola-27" controls muted playsinline preload="metadata" aria-label="Vídeo de apresentação da TV Escola"></video></div>
+            <article class="tv-school-detail-card tv-school-detail-video-card">
+              <div class="tv-school-detail-media"><video src="./assets/tv-escola-video.mp4?v=tv-escola-29" controls muted playsinline preload="metadata" data-tv-school-hover-video aria-label="Vídeo de apresentação da TV Escola"></video></div>
               <div class="tv-school-detail-card-copy"><h3>Mensagens em movimento</h3><p>Use vídeos e conteúdos dinâmicos para aproximar alunos, famílias, professores e colaboradores.</p></div>
             </article>
           </div>
@@ -92,6 +92,26 @@
         const isOpen = header.classList.toggle('menu-open');
         menuButton.setAttribute('aria-expanded', String(isOpen));
         menuButton.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+      });
+
+      const hoverVideo = document.querySelector('[data-tv-school-hover-video]');
+      const hoverVideoCard = hoverVideo?.closest('[data-tv-school-video-card], .tv-school-detail-video-card');
+      const playVideoPreview = () => {
+        if (!hoverVideo) return;
+        hoverVideo.muted = true;
+        if (hoverVideo.ended) hoverVideo.currentTime = 0;
+        hoverVideo.play().catch(() => {});
+      };
+      const stopVideoPreview = () => {
+        if (!hoverVideo) return;
+        hoverVideo.pause();
+        hoverVideo.currentTime = 0;
+      };
+      hoverVideoCard?.addEventListener('mouseenter', playVideoPreview);
+      hoverVideoCard?.addEventListener('mouseleave', stopVideoPreview);
+      hoverVideoCard?.addEventListener('focusin', playVideoPreview);
+      hoverVideoCard?.addEventListener('focusout', (event) => {
+        if (!hoverVideoCard.contains(event.relatedTarget)) stopVideoPreview();
       });
     </script>
   </body>
