@@ -204,9 +204,6 @@ h3 { font-size: 21px; line-height: 1.1; }
 .tv-school-detail-video-card .tv-school-detail-media { cursor: pointer; }
 .tv-school-media-image-trigger { display: block; width: 100%; height: 100%; border: 0; padding: 0; background: transparent; }
 .tv-school-media-image-trigger:focus-visible { outline: 3px solid var(--cyan); outline-offset: -3px; }
-.tv-school-media-expand { position: absolute; right: 12px; bottom: 12px; z-index: 2; display: grid; width: 34px; height: 34px; place-items: center; border: 1px solid rgba(255,255,255,.7); border-radius: 7px; color: var(--white); background: rgba(7,26,75,.58); cursor: pointer; opacity: .82; transition: opacity .2s ease, background .2s ease, transform .2s ease; }
-.tv-school-media-expand:hover, .tv-school-media-expand:focus-visible { opacity: 1; background: rgba(7,26,75,.86); transform: translateY(-2px); }
-.tv-school-media-expand:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
 .tv-school-lightbox { width: min(1180px, calc(100% - 32px)); max-width: none; max-height: calc(100% - 32px); margin: auto; border: 0; border-radius: 10px; padding: 0; color: var(--ink); background: transparent; }
 .tv-school-lightbox::backdrop { background: rgba(7,26,75,.76); backdrop-filter: blur(7px); }
 .tv-school-lightbox-shell { position: relative; max-height: calc(100vh - 32px); overflow: auto; border: 1px solid rgba(102,144,195,.3); border-radius: 10px; padding: clamp(22px, 3vw, 36px); background: var(--white); box-shadow: 0 28px 90px rgba(3,24,64,.4); }
