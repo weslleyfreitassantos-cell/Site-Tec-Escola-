@@ -153,6 +153,9 @@ h3 { font-size: 21px; line-height: 1.1; }
 @keyframes dashboard-screen-sheen { 0%, 18% { background-position: 120% 0; opacity: .1; } 54%, 72% { background-position: -20% 0; opacity: .72; } 100% { background-position: -60% 0; opacity: .1; } }
 @keyframes dashboard-chart-pulse { 0%, 100% { opacity: .22; transform: scaleY(.86); } 50% { opacity: .68; transform: scaleY(1); } }
 @keyframes dashboard-donut-pulse { 0%, 100% { opacity: .22; transform: scale(.94); } 50% { opacity: .72; transform: scale(1.05); } }
+.tv-school-section { display: grid; min-height: clamp(520px, 52vw, 720px); align-items: center; overflow: hidden; padding: clamp(64px, 8vw, 112px) 0; background: linear-gradient(118deg, #071a4b 0%, #163fae 46%, #55c8e6 100%); }
+.tv-school-stage { width: min(1280px, calc(100% - clamp(32px, 5vw, 48px))); margin: 0 auto; }
+.tv-school-image { display: block; width: 100%; height: clamp(360px, 48vw, 620px); object-fit: cover; object-position: center; box-shadow: 0 28px 70px rgba(3, 24, 64, .3); }
 .browser-window { position: relative; z-index: 1; overflow: hidden; border: 7px solid #172548; border-radius: 12px; background: #172548; box-shadow: var(--shadow); transform: perspective(1000px) rotateY(-4deg) rotateX(2deg); }
 .browser-bar { display: flex; height: 32px; align-items: center; gap: 5px; padding: 0 11px; color: #8091bb; background: #172548; }
 .browser-bar span { width: 7px; height: 7px; border-radius: 50%; background: #677aa8; }
@@ -279,5 +282,6 @@ h3 { font-size: 21px; line-height: 1.1; }
 @media (max-width: 760px) { .hero-slide::after { left: 0; } }
 @media (max-width: 760px) { .footer-kicker { margin-top: 24px; font-size: 17px; }.footer-socials { margin-top: 32px; }.footer-column { gap: 12px; padding-top: 0; }.footer-column .footer-subtitle { margin-top: 14px; }.footer-bottom { gap: 9px; } }
 @media (max-width: 760px) { .director-showcase { width: 100%; margin-right: 0; padding: 22px 0; }.director-dashboard-frame { min-height: 0; aspect-ratio: 1.18; }.director-dashboard-image { min-height: 0; } }
+@media (max-width: 760px) { .tv-school-section { min-height: 0; padding: 48px 0; }.tv-school-stage { width: 100%; }.tv-school-image { height: 360px; object-position: center; } }
 @media (max-width: 430px) { h1 { font-size: 42px; }.hero-actions .button { width: 100%; }.form-row { grid-template-columns: 1fr; gap: 0; }.profile-grid { display: grid; grid-template-columns: 1fr; }.profile-card { min-height: 0; width: auto; }.profile-card:last-child { grid-column: auto; width: auto; }.browser-window { transform: none; }.app-preview { min-height: 360px; }.preview-main { padding: 18px 13px; }.preview-heading { padding-top: 28px; }.preview-heading h3 { font-size: 21px; }.bars { gap: 7px; }.bars i { width: 13px; }.demo-layout { flex-direction: column; gap: 30px; }.demo-form { max-width: none; flex: none; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } .reveal { opacity: 1; transform: none; } }
