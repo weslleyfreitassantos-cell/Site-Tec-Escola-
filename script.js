@@ -17,6 +17,10 @@ const phoneTabs = [...document.querySelectorAll('[data-phone-tab]')];
 const phoneStage = document.querySelector('.phone-stage');
 const phoneDevice = document.querySelector('.phone-device');
 const navLinks = [...document.querySelectorAll('.desktop-nav a')];
+const navTargets = navLinks.map((link) => {
+  const target = document.querySelector(link.getAttribute('href'));
+  return target?.closest('section') || target;
+});
 const tvSchoolSlides = [...document.querySelectorAll('[data-tv-school-slide]')];
 const tvSchoolDots = [...document.querySelectorAll('[data-tv-school-dot]')];
 const tvSchoolVideos = [...document.querySelectorAll('[data-tv-school-video]')];
@@ -65,6 +69,17 @@ function setActiveNav(link) {
     if (isActive) navLink.setAttribute('aria-current', 'page');
     else navLink.removeAttribute('aria-current');
   });
+}
+
+function updateActiveNavFromScroll() {
+  const marker = window.scrollY + (header?.offsetHeight || 78) + 16;
+  let activeIndex = 0;
+
+  navTargets.forEach((target, index) => {
+    if (target && target.offsetTop <= marker) activeIndex = index;
+  });
+
+  setActiveNav(navLinks[activeIndex]);
 }
 
 const screens = {
@@ -217,8 +232,10 @@ function setScreen(name) {
 
 window.addEventListener('scroll', updateHeader, { passive: true });
 window.addEventListener('scroll', updateScrollMotion, { passive: true });
+window.addEventListener('scroll', updateActiveNavFromScroll, { passive: true });
 updateHeader();
 updateScrollMotion();
+updateActiveNavFromScroll();
 setHeroSlide(0);
 restartHeroTimer();
 setPhoneScene('dashboard');
@@ -258,7 +275,6 @@ tvSchoolVideos.forEach((video) => video.addEventListener('ended', () => {
 }));
 
 navLinks.forEach((link) => link.addEventListener('click', () => setActiveNav(link)));
-setActiveNav(navLinks.find((link) => link.getAttribute('href') === window.location.hash));
 
 differentialsNav?.addEventListener('mouseenter', () => differentialsSection?.classList.add('is-previewing'));
 differentialsNav?.addEventListener('mouseleave', () => differentialsSection?.classList.remove('is-previewing'));
