@@ -287,21 +287,21 @@ h3 { font-size: 21px; line-height: 1.1; }
 
 .center-heading { max-width: 690px; margin: 0 auto 58px; text-align: center; }
 .light-heading h2 { color: white; }
-.profile-section { position: relative; isolation: isolate; overflow: hidden; padding: clamp(64px, 6.2vw, 88px) 0; background: #071c58; }
+.profile-section { position: relative; isolation: isolate; overflow: hidden; padding: clamp(48px, 4.2vw, 68px) 0; background: #071c58; }
 .profile-section::before { position: absolute; inset: 0; z-index: 0; width: 100%; background: url("./assets/alunos-app-hero.png?v=profiles-students-app-alice") center center / cover no-repeat; content: ""; opacity: .94; pointer-events: none; }
 .profile-section::after { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(7,28,88,.03) 0%, rgba(7,28,88,.04) 40%, rgba(7,28,88,.07) 58%, rgba(7,28,88,.11) 78%, rgba(7,28,88,.16) 100%), linear-gradient(90deg, rgba(7,28,88,0) 0%, rgba(7,28,88,.03) 44%, rgba(7,28,88,.58) 72%, rgba(7,28,88,.78) 100%); content: ""; pointer-events: none; }
-.profile-shell { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); align-items: center; gap: clamp(36px, 5vw, 80px); min-height: 560px; }
-.profile-section .center-heading { position: relative; z-index: 0; grid-column: 2; max-width: 650px; margin: 0 0 34px; text-align: left; }
+.profile-shell { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); align-items: center; gap: clamp(28px, 4vw, 60px); min-height: 0; }
+.profile-section .center-heading { position: relative; z-index: 0; grid-column: 2; max-width: 600px; margin: 0 0 24px; text-align: left; }
 .profile-section .center-heading::before { position: absolute; z-index: -1; inset: -34% -30% -48% -30%; background: radial-gradient(ellipse 72% 88% at 48% 46%, rgba(7,28,88,.62) 0%, rgba(7,28,88,.34) 48%, rgba(7,28,88,0) 82%); content: ""; filter: blur(10px); pointer-events: none; }
-.profile-section .center-heading h2 { max-width: 650px; }
-.profile-grid { display: grid; grid-column: 2; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-.profile-card { min-width: 0; min-height: 174px; border: 1px solid rgba(168,241,244,.24); border-radius: 8px; padding: 20px; background: rgba(8,36,91,.58); box-shadow: 0 18px 50px rgba(3,18,59,.16); backdrop-filter: blur(8px); transition: transform .25s ease, background .25s ease, border-color .25s ease; }
+.profile-section .center-heading h2 { max-width: 600px; font-size: clamp(36px, 3.2vw, 50px); }
+.profile-grid { display: grid; grid-column: 2; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.profile-card { min-width: 0; min-height: 150px; border: 1px solid rgba(168,241,244,.24); border-radius: 8px; padding: 16px 18px; background: rgba(8,36,91,.58); box-shadow: 0 18px 50px rgba(3,18,59,.16); backdrop-filter: blur(8px); transition: transform .25s ease, background .25s ease, border-color .25s ease; }
 .profile-card:last-child { grid-column: span 2; }
 .profile-card:hover { transform: translateY(-5px); background: rgba(255,255,255,.1); }
-.profile-icon { display: grid; width: 34px; height: 34px; place-items: center; margin-bottom: 28px; border: 1px solid rgba(168,241,244,.72); border-radius: 6px; color: var(--cyan); font-size: 10px; font-weight: 900; }
-.profile-card h3 { margin-bottom: 10px; color: white; }
-.profile-card p { color: #b7c8e7; font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; }
-@media (min-width: 761px) { .profile-section::before { background-size: auto 100%; background-position: center center; }.profile-grid { position: relative; top: clamp(16px, 2vw, 30px); left: clamp(8px, 2vw, 30px); } }
+.profile-icon { display: grid; width: 30px; height: 30px; place-items: center; margin-bottom: 18px; border: 1px solid rgba(168,241,244,.72); border-radius: 6px; color: var(--cyan); font-size: 9px; font-weight: 900; }
+.profile-card h3 { margin-bottom: 8px; color: white; font-size: 19px; }
+.profile-card p { color: #b7c8e7; font-size: 12px; line-height: 1.4; overflow-wrap: anywhere; }
+@media (min-width: 761px) { .profile-section::before { background-size: auto 100%; background-position: center center; }.profile-grid { position: relative; top: clamp(14px, 1.5vw, 24px); left: clamp(12px, 1.8vw, 28px); } }
 
 .differentiator-grid { display: grid; grid-template-columns: .88fr 1.12fr; align-items: center; gap: 100px; }
 .differentiator-list { margin-top: 40px; border-top: 1px solid var(--line); }
