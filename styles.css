@@ -153,7 +153,7 @@ h3 { font-size: 21px; line-height: 1.1; }
 @keyframes dashboard-screen-sheen { 0%, 18% { background-position: 120% 0; opacity: .1; } 54%, 72% { background-position: -20% 0; opacity: .72; } 100% { background-position: -60% 0; opacity: .1; } }
 @keyframes dashboard-chart-pulse { 0%, 100% { opacity: .22; transform: scaleY(.86); } 50% { opacity: .68; transform: scaleY(1); } }
 @keyframes dashboard-donut-pulse { 0%, 100% { opacity: .22; transform: scale(.94); } 50% { opacity: .72; transform: scale(1.05); } }
-.tv-school-section { display: grid; min-height: clamp(520px, 52vw, 720px); align-items: center; overflow: hidden; padding: clamp(64px, 8vw, 112px) 0; background: linear-gradient(118deg, #071a4b 0%, #163fae 46%, #55c8e6 100%); }
+.tv-school-section { display: grid; min-height: clamp(520px, 52vw, 720px); align-items: center; overflow: hidden; padding: clamp(64px, 8vw, 112px) 0; background: linear-gradient(90deg, #071a4b 0%, #163fae 44%, #ffffff 78%, #ffffff 100%); }
 .tv-school-stage { width: min(1280px, calc(100% - clamp(32px, 5vw, 48px))); margin: 0 auto; }
 .tv-school-image { display: block; width: 100%; height: clamp(360px, 48vw, 620px); object-fit: cover; object-position: center; box-shadow: 0 28px 70px rgba(3, 24, 64, .3); }
 .browser-window { position: relative; z-index: 1; overflow: hidden; border: 7px solid #172548; border-radius: 12px; background: #172548; box-shadow: var(--shadow); transform: perspective(1000px) rotateY(-4deg) rotateX(2deg); }
