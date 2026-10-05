@@ -7,6 +7,8 @@ const screenLabel = document.querySelector('[data-screen-label]');
 const screenTitle = document.querySelector('[data-screen-title]');
 const caption = document.querySelector('[data-caption]');
 const screenContent = document.querySelector('[data-screen-content]');
+const featureCards = [...document.querySelectorAll('[data-feature-card]')];
+const featureGrid = document.querySelector('.feature-grid');
 const hero = document.querySelector('.hero');
 const heroPerson = document.querySelector('.hero-person');
 const heroSlides = [...document.querySelectorAll('[data-hero-slide]')];
@@ -36,6 +38,8 @@ let phoneTimer;
 let tvSchoolTimer;
 let tvSchoolFeedbackTimer;
 let tvSchoolPaused = false;
+let featureCardTimer;
+let featureCardsInView = false;
 
 function playTvSchoolVideo(video) {
   if (!video || tvSchoolPaused) return;
@@ -173,6 +177,21 @@ function restartPhoneTimer() {
   }
 }
 
+function setActiveFeatureCard(nextIndex) {
+  if (!featureCards.length) return;
+  const activeIndex = (nextIndex + featureCards.length) % featureCards.length;
+  featureCards.forEach((card, index) => card.classList.toggle('is-active', index === activeIndex));
+}
+
+function restartFeatureCardTimer() {
+  window.clearInterval(featureCardTimer);
+  if (reduceMotion || featureCards.length < 2 || !featureCardsInView) return;
+  featureCardTimer = window.setInterval(() => {
+    const activeIndex = featureCards.findIndex((card) => card.classList.contains('is-active'));
+    setActiveFeatureCard(activeIndex + 1);
+  }, 1000);
+}
+
 function setTvSchoolSlide(nextIndex) {
   if (!tvSchoolSlides.length) return;
   const activeIndex = (nextIndex + tvSchoolSlides.length) % tvSchoolSlides.length;
@@ -250,6 +269,7 @@ restartHeroTimer();
 setPhoneScene('dashboard');
 restartPhoneTimer();
 setScreen('dashboard');
+setActiveFeatureCard(0);
 setTvSchoolSlide(0);
 restartTvSchoolTimer();
 
@@ -292,6 +312,17 @@ const tvSchoolVisibilityObserver = tvSchoolStage ? new IntersectionObserver(([en
   }
 }, { threshold: .35 }) : null;
 tvSchoolVisibilityObserver?.observe(tvSchoolStage);
+
+const featureVisibilityObserver = featureGrid ? new IntersectionObserver(([entry]) => {
+  featureCardsInView = entry.isIntersecting;
+  if (entry.isIntersecting) {
+    setActiveFeatureCard(0);
+    restartFeatureCardTimer();
+  } else {
+    window.clearInterval(featureCardTimer);
+  }
+}, { threshold: .25 }) : null;
+featureVisibilityObserver?.observe(featureGrid);
 
 navLinks.forEach((link) => link.addEventListener('click', () => setActiveNav(link)));
 
