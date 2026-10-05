@@ -37,6 +37,15 @@ let tvSchoolTimer;
 let tvSchoolFeedbackTimer;
 let tvSchoolPaused = false;
 
+function playTvSchoolVideo(video) {
+  if (!video || tvSchoolPaused) return;
+  video.muted = true;
+  video.defaultMuted = true;
+  video.setAttribute('muted', '');
+  video.setAttribute('playsinline', '');
+  video.play().catch(() => {});
+}
+
 const whatsappNumber = (whatsappLink?.dataset.whatsappNumber || '5571987336205').replace(/\D/g, '');
 const getWhatsappUrl = (message = '') => {
   if (!whatsappNumber) return '';
@@ -178,7 +187,7 @@ function setTvSchoolSlide(nextIndex) {
     dot.setAttribute('aria-pressed', String(isActive));
   });
   const activeVideo = tvSchoolSlides[activeIndex].querySelector('[data-tv-school-video]');
-  if (activeVideo && !tvSchoolPaused) activeVideo.play().catch(() => {});
+  playTvSchoolVideo(activeVideo);
 }
 
 function restartTvSchoolTimer() {
@@ -209,7 +218,7 @@ function setTvSchoolPaused(paused) {
     return;
   }
 
-  if (activeVideo) activeVideo.play().catch(() => {});
+  playTvSchoolVideo(activeVideo);
   restartTvSchoolTimer();
   tvSchoolFeedbackTimer = window.setTimeout(() => tvSchoolStage?.classList.remove('is-feedback'), 800);
 }
@@ -273,6 +282,16 @@ tvSchoolVideos.forEach((video) => video.addEventListener('ended', () => {
     restartTvSchoolTimer();
   }
 }));
+
+const tvSchoolVisibilityObserver = tvSchoolStage ? new IntersectionObserver(([entry]) => {
+  const activeVideo = tvSchoolSlides.find((slide) => slide.classList.contains('is-active'))?.querySelector('[data-tv-school-video]');
+  if (entry.isIntersecting) {
+    playTvSchoolVideo(activeVideo);
+  } else if (!tvSchoolPaused) {
+    activeVideo?.pause();
+  }
+}, { threshold: .35 }) : null;
+tvSchoolVisibilityObserver?.observe(tvSchoolStage);
 
 navLinks.forEach((link) => link.addEventListener('click', () => setActiveNav(link)));
 
