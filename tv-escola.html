@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=tv-escola-32" />
+    <link rel="stylesheet" href="./styles.css?v=tv-escola-33" />
   </head>
   <body class="tv-school-detail-page">
     <header class="site-header is-scrolled" data-header>
@@ -70,7 +70,7 @@
             </article>
             <article class="tv-school-detail-card tv-school-detail-video-card">
               <div class="tv-school-detail-media">
-                <video src="./assets/tv-escola-video.mp4?v=tv-escola-31" controls muted playsinline preload="metadata" data-tv-school-hover-video aria-label="Vídeo de apresentação da TV Escola"></video>
+                <video src="./assets/tv-escola-video.mp4?v=tv-escola-33" controls muted playsinline preload="auto" data-tv-school-hover-video data-tv-school-mobile-autoplay aria-label="Vídeo de apresentação da TV Escola"></video>
                 <button class="tv-school-media-expand" type="button" data-tv-school-lightbox-trigger="video" data-tv-school-lightbox-label="Mensagens em movimento" aria-label="Abrir o vídeo em tamanho maior" title="Abrir o vídeo em tamanho maior"><span aria-hidden="true">⛶</span></button>
               </div>
               <div class="tv-school-detail-card-copy"><h3>Mensagens em movimento</h3><p>Use vídeos e conteúdos dinâmicos para aproximar alunos, famílias, professores e colaboradores.</p></div>
@@ -136,6 +136,16 @@
       hoverVideoCard?.addEventListener('focusout', (event) => {
         if (!hoverVideoCard.contains(event.relatedTarget)) stopVideoPreview();
       });
+
+      const mobileViewport = window.matchMedia('(max-width: 760px)');
+      const startMobileVideo = () => {
+        if (!hoverVideo || !mobileViewport.matches) return;
+        hoverVideo.muted = true;
+        if (hoverVideo.ended) hoverVideo.currentTime = 0;
+        hoverVideo.play().catch(() => {});
+      };
+      startMobileVideo();
+      mobileViewport.addEventListener?.('change', startMobileVideo);
 
       const lightbox = document.querySelector('[data-tv-school-lightbox]');
       const lightboxImage = document.querySelector('[data-tv-school-lightbox-image]');
