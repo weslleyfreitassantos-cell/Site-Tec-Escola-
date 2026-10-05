@@ -158,7 +158,7 @@ h3 { font-size: 21px; line-height: 1.1; }
 .tv-school-stage { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border: 6px solid rgba(255,255,255,.12); border-radius: 10px; box-shadow: 0 28px 70px rgba(3, 24, 64, .34), 0 0 0 1px rgba(255,255,255,.12); }
 .tv-school-slide { position: absolute; inset: 0; opacity: 0; transition: opacity .7s ease; }
 .tv-school-slide.is-active { opacity: 1; }
-.tv-school-slide img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.tv-school-slide img, .tv-school-slide video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .tv-school-controls { position: absolute; bottom: clamp(16px, 3vw, 34px); left: 50%; display: flex; gap: 8px; transform: translateX(-50%); }
 .tv-school-dot { width: 9px; height: 9px; border: 1px solid rgba(255,255,255,.88); border-radius: 50%; padding: 0; background: transparent; cursor: pointer; transition: transform .2s ease, background .2s ease; }
 .tv-school-dot:hover, .tv-school-dot:focus-visible { transform: scale(1.25); }

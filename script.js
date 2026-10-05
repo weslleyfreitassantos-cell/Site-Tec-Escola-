@@ -19,6 +19,7 @@ const phoneDevice = document.querySelector('.phone-device');
 const navLinks = [...document.querySelectorAll('.desktop-nav a')];
 const tvSchoolSlides = [...document.querySelectorAll('[data-tv-school-slide]')];
 const tvSchoolDots = [...document.querySelectorAll('[data-tv-school-dot]')];
+const tvSchoolVideos = [...document.querySelectorAll('[data-tv-school-video]')];
 const differentialsNav = document.querySelector('[data-differentials-nav]');
 const differentialsSection = document.querySelector('#diferenciais');
 const whatsappLink = document.querySelector('[data-whatsapp-link]');
@@ -147,19 +148,28 @@ function restartPhoneTimer() {
 function setTvSchoolSlide(nextIndex) {
   if (!tvSchoolSlides.length) return;
   const activeIndex = (nextIndex + tvSchoolSlides.length) % tvSchoolSlides.length;
+  tvSchoolVideos.forEach((video) => {
+    video.pause();
+    video.currentTime = 0;
+  });
   tvSchoolSlides.forEach((slide, index) => slide.classList.toggle('is-active', index === activeIndex));
   tvSchoolDots.forEach((dot, index) => {
     const isActive = index === activeIndex;
     dot.classList.toggle('is-active', isActive);
     dot.setAttribute('aria-pressed', String(isActive));
   });
+  const activeVideo = tvSchoolSlides[activeIndex].querySelector('[data-tv-school-video]');
+  if (activeVideo) activeVideo.play().catch(() => {});
 }
 
 function restartTvSchoolTimer() {
-  window.clearInterval(tvSchoolTimer);
-  if (!reduceMotion && tvSchoolSlides.length > 1) tvSchoolTimer = window.setInterval(() => {
-    const activeIndex = tvSchoolSlides.findIndex((slide) => slide.classList.contains('is-active'));
+  window.clearTimeout(tvSchoolTimer);
+  if (reduceMotion || tvSchoolSlides.length < 2) return;
+  const activeIndex = tvSchoolSlides.findIndex((slide) => slide.classList.contains('is-active'));
+  if (tvSchoolSlides[activeIndex].querySelector('[data-tv-school-video]')) return;
+  tvSchoolTimer = window.setTimeout(() => {
     setTvSchoolSlide(activeIndex + 1);
+    restartTvSchoolTimer();
   }, 3000);
 }
 
@@ -201,6 +211,14 @@ phoneStage?.addEventListener('mouseleave', restartPhoneTimer);
 tvSchoolDots.forEach((dot) => dot.addEventListener('click', () => {
   setTvSchoolSlide(Number(dot.dataset.tvSchoolDot));
   restartTvSchoolTimer();
+}));
+
+tvSchoolVideos.forEach((video) => video.addEventListener('ended', () => {
+  const activeIndex = tvSchoolSlides.findIndex((slide) => slide.classList.contains('is-active'));
+  if (tvSchoolSlides[activeIndex]?.contains(video)) {
+    setTvSchoolSlide(activeIndex + 1);
+    restartTvSchoolTimer();
+  }
 }));
 
 navLinks.forEach((link) => link.addEventListener('click', () => setActiveNav(link)));
