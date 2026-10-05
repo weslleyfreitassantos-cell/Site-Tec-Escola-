@@ -30,6 +30,7 @@ let heroIndex = 0;
 let heroTimer;
 let phoneTimer;
 let tvSchoolTimer;
+let tvSchoolFeedbackTimer;
 let tvSchoolPaused = false;
 
 const whatsappNumber = (whatsappLink?.dataset.whatsappNumber || '5571987336205').replace(/\D/g, '');
@@ -178,10 +179,13 @@ function restartTvSchoolTimer() {
 
 function setTvSchoolPaused(paused) {
   tvSchoolPaused = paused;
+  window.clearTimeout(tvSchoolFeedbackTimer);
   tvSchoolStage?.classList.toggle('is-paused', paused);
+  tvSchoolStage?.classList.toggle('is-feedback', !paused);
   tvSchoolToggle?.setAttribute('aria-pressed', String(paused));
   tvSchoolToggle?.setAttribute('aria-label', paused ? 'Retomar carrossel da TV Escola' : 'Pausar carrossel da TV Escola');
   tvSchoolToggle?.setAttribute('title', paused ? 'Retomar carrossel da TV Escola' : 'Pausar carrossel da TV Escola');
+  tvSchoolToggle?.setAttribute('data-tv-school-feedback', paused ? 'pause' : 'play');
 
   const activeVideo = tvSchoolSlides.find((slide) => slide.classList.contains('is-active'))?.querySelector('[data-tv-school-video]');
   if (paused) {
@@ -192,6 +196,7 @@ function setTvSchoolPaused(paused) {
 
   if (activeVideo) activeVideo.play().catch(() => {});
   restartTvSchoolTimer();
+  tvSchoolFeedbackTimer = window.setTimeout(() => tvSchoolStage?.classList.remove('is-feedback'), 800);
 }
 
 function setScreen(name) {
