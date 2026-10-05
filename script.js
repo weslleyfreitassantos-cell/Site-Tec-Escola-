@@ -17,6 +17,8 @@ const phoneTabs = [...document.querySelectorAll('[data-phone-tab]')];
 const phoneStage = document.querySelector('.phone-stage');
 const phoneDevice = document.querySelector('.phone-device');
 const navLinks = [...document.querySelectorAll('.desktop-nav a')];
+const tvSchoolSlides = [...document.querySelectorAll('[data-tv-school-slide]')];
+const tvSchoolDots = [...document.querySelectorAll('[data-tv-school-dot]')];
 const differentialsNav = document.querySelector('[data-differentials-nav]');
 const differentialsSection = document.querySelector('#diferenciais');
 const whatsappLink = document.querySelector('[data-whatsapp-link]');
@@ -24,6 +26,7 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 let heroIndex = 0;
 let heroTimer;
 let phoneTimer;
+let tvSchoolTimer;
 
 const whatsappNumber = (whatsappLink?.dataset.whatsappNumber || '5571987336205').replace(/\D/g, '');
 const getWhatsappUrl = (message = '') => {
@@ -141,6 +144,25 @@ function restartPhoneTimer() {
   }
 }
 
+function setTvSchoolSlide(nextIndex) {
+  if (!tvSchoolSlides.length) return;
+  const activeIndex = (nextIndex + tvSchoolSlides.length) % tvSchoolSlides.length;
+  tvSchoolSlides.forEach((slide, index) => slide.classList.toggle('is-active', index === activeIndex));
+  tvSchoolDots.forEach((dot, index) => {
+    const isActive = index === activeIndex;
+    dot.classList.toggle('is-active', isActive);
+    dot.setAttribute('aria-pressed', String(isActive));
+  });
+}
+
+function restartTvSchoolTimer() {
+  window.clearInterval(tvSchoolTimer);
+  if (!reduceMotion && tvSchoolSlides.length > 1) tvSchoolTimer = window.setInterval(() => {
+    const activeIndex = tvSchoolSlides.findIndex((slide) => slide.classList.contains('is-active'));
+    setTvSchoolSlide(activeIndex + 1);
+  }, 3000);
+}
+
 function setScreen(name) {
   const screen = screens[name];
   if (!screen) return;
@@ -166,6 +188,8 @@ restartHeroTimer();
 setPhoneScene('dashboard');
 restartPhoneTimer();
 setScreen('dashboard');
+setTvSchoolSlide(0);
+restartTvSchoolTimer();
 
 phoneTabs.forEach((tab) => tab.addEventListener('click', () => {
   setPhoneScene(tab.dataset.phoneTab);
@@ -173,6 +197,11 @@ phoneTabs.forEach((tab) => tab.addEventListener('click', () => {
 }));
 phoneStage?.addEventListener('mouseenter', () => window.clearInterval(phoneTimer));
 phoneStage?.addEventListener('mouseleave', restartPhoneTimer);
+
+tvSchoolDots.forEach((dot) => dot.addEventListener('click', () => {
+  setTvSchoolSlide(Number(dot.dataset.tvSchoolDot));
+  restartTvSchoolTimer();
+}));
 
 navLinks.forEach((link) => link.addEventListener('click', () => setActiveNav(link)));
 setActiveNav(navLinks.find((link) => link.getAttribute('href') === window.location.hash));
