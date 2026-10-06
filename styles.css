@@ -185,13 +185,13 @@ h3 { font-size: 21px; line-height: 1.1; }
 
 .tv-school-detail-page { min-height: 100vh; background: linear-gradient(135deg, #dff8fb 0%, #fff 48%, #e8f1ff 100%); }
 .tv-school-detail { overflow: hidden; }
-.tv-school-detail-hero { position: relative; padding: clamp(142px, 15vw, 202px) 0 clamp(82px, 9vw, 126px); }
+.tv-school-detail-hero { position: relative; padding: clamp(142px, 15vw, 202px) 0 clamp(44px, 5vw, 72px); }
 .tv-school-detail-hero::after { position: absolute; right: -12%; bottom: -28%; width: 48vw; height: 48vw; border-radius: 50%; background: radial-gradient(circle, rgba(168,241,244,.36) 0%, rgba(168,241,244,0) 70%); content: ""; pointer-events: none; }
 .tv-school-detail-hero-inner { position: relative; z-index: 1; }
 .tv-school-detail-hero h1 { max-width: 850px; margin-bottom: 24px; color: var(--navy); font-size: clamp(48px, 7vw, 92px); }
 .tv-school-detail-hero h1 em { color: #39a9d1; }
 .tv-school-detail-hero-lead { max-width: 700px; margin-bottom: 0; color: #52617a; font-size: clamp(18px, 2vw, 23px); line-height: 1.6; }
-.tv-school-detail-gallery { padding: clamp(74px, 9vw, 124px) 0; background: rgba(255,255,255,.7); }
+.tv-school-detail-gallery { padding: clamp(42px, 5vw, 72px) 0; background: rgba(255,255,255,.7); }
 .tv-school-detail-heading { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); align-items: end; gap: 40px; margin-bottom: 42px; }
 .tv-school-detail-heading h2 { max-width: 530px; margin-bottom: 0; color: var(--navy); }
 .tv-school-detail-heading p { max-width: 600px; margin-bottom: 0; color: var(--muted); font-size: 17px; line-height: 1.65; }
