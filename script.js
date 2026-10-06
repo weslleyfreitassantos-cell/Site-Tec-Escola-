@@ -32,7 +32,9 @@ const tvSchoolToggle = document.querySelector('[data-tv-school-toggle]');
 const differentialsNav = document.querySelector('[data-differentials-nav]');
 const differentialsSection = document.querySelector('#diferenciais');
 const stackedPanels = document.querySelector('[data-stack-panels]');
-const stackPanels = [...document.querySelectorAll('[data-stack-panel]')];
+const stackPanels = [...document.querySelectorAll('[data-stack-panel]')].sort((firstPanel, secondPanel) => (
+  Number(firstPanel.dataset.stackPanel) - Number(secondPanel.dataset.stackPanel)
+));
 const whatsappLink = document.querySelector('[data-whatsapp-link]');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let heroIndex = 0;
@@ -235,6 +237,12 @@ function setActiveStackPanel(nextIndex) {
   stackPanels.forEach((panel, index) => {
     const isActive = index === activeIndex;
     panel.classList.toggle('is-active', isActive);
+    const progress = panel.querySelector('.panel-progress');
+    progress?.classList.toggle('is-active', isActive);
+    if (progress) progress.style.opacity = isActive ? '1' : '0';
+    panel.querySelectorAll('.panel-progress i').forEach((indicator, indicatorIndex) => {
+      indicator.classList.toggle('is-current', isActive && indicatorIndex === activeIndex);
+    });
   });
 }
 
