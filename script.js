@@ -30,6 +30,8 @@ const tvSchoolStage = document.querySelector('.tv-school-stage');
 const tvSchoolToggle = document.querySelector('[data-tv-school-toggle]');
 const differentialsNav = document.querySelector('[data-differentials-nav]');
 const differentialsSection = document.querySelector('#diferenciais');
+const stackedPanels = document.querySelector('[data-stack-panels]');
+const stackPanels = [...document.querySelectorAll('[data-stack-panel]')];
 const whatsappLink = document.querySelector('[data-whatsapp-link]');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let heroIndex = 0;
@@ -41,6 +43,9 @@ let tvSchoolPaused = false;
 const TV_SCHOOL_SLIDE_DURATION = 3000;
 let featureCardTimer;
 let featureCardsInView = false;
+let stackPanelTimer;
+let stackPanelsInView = false;
+const STACK_PANEL_DURATION = 2200;
 
 function playTvSchoolVideo(video) {
   if (!video || tvSchoolPaused) return;
@@ -193,6 +198,25 @@ function restartFeatureCardTimer() {
   }, 1000);
 }
 
+function setActiveStackPanel(nextIndex) {
+  if (!stackedPanels || !stackPanels.length) return;
+  const activeIndex = (nextIndex + stackPanels.length) % stackPanels.length;
+  stackedPanels.dataset.stackActive = String(activeIndex);
+  stackPanels.forEach((panel, index) => {
+    const isActive = index === activeIndex;
+    panel.classList.toggle('is-active', isActive);
+  });
+}
+
+function restartStackPanelTimer() {
+  window.clearInterval(stackPanelTimer);
+  if (stackPanels.length < 2) return;
+  stackPanelTimer = window.setInterval(() => {
+    const activeIndex = stackPanels.findIndex((panel) => panel.classList.contains('is-active'));
+    setActiveStackPanel(activeIndex + 1);
+  }, STACK_PANEL_DURATION);
+}
+
 function setTvSchoolSlide(nextIndex) {
   if (!tvSchoolSlides.length) return;
   const activeIndex = (nextIndex + tvSchoolSlides.length) % tvSchoolSlides.length;
@@ -270,6 +294,8 @@ setPhoneScene('dashboard');
 restartPhoneTimer();
 setScreen('dashboard');
 setActiveFeatureCard(0);
+setActiveStackPanel(0);
+restartStackPanelTimer();
 setTvSchoolSlide(0);
 restartTvSchoolTimer();
 
@@ -323,6 +349,17 @@ const featureVisibilityObserver = featureGrid ? new IntersectionObserver(([entry
   }
 }, { threshold: .25 }) : null;
 featureVisibilityObserver?.observe(featureGrid);
+
+const stackPanelsVisibilityObserver = stackedPanels ? new IntersectionObserver(([entry]) => {
+  stackPanelsInView = entry.isIntersecting;
+  if (entry.isIntersecting) {
+    setActiveStackPanel(0);
+    restartStackPanelTimer();
+  } else {
+    window.clearInterval(stackPanelTimer);
+  }
+}, { threshold: .25 }) : null;
+stackPanelsVisibilityObserver?.observe(stackedPanels);
 
 navLinks.forEach((link) => link.addEventListener('click', () => setActiveNav(link)));
 
