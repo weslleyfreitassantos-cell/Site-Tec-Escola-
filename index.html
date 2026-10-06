@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=hero-table-bottom-curve-11" />
+    <link rel="stylesheet" href="./styles.css?v=tv-escola-60" />
   </head>
   <body>
     <header class="site-header" data-header>
@@ -23,10 +23,12 @@
       </a>
 
       <nav class="desktop-nav" aria-label="Navegação principal">
-        <a href="#plataforma">Plataforma</a>
+        <a href="#top">Início</a>
         <a href="#perfis">Para quem é</a>
-        <a href="#diferenciais" data-differentials-nav>Diferenciais</a>
+        <a href="#plataforma">Plataforma</a>
+        <a href="#tv-escola">TV Escola</a>
         <a href="#demonstracao">Cadastre-se</a>
+        <a href="#diferenciais" data-differentials-nav>Diferenciais</a>
       </nav>
 
       <div class="header-actions">
@@ -59,13 +61,14 @@
           <div class="hero-person" aria-label="Profissionais usando o Tec Escola">
             <div class="hero-slides" aria-live="polite">
               <figure class="hero-slide is-active" data-hero-slide="0">
-                <img class="hero-person-base" src="./assets/educadora-grade-horario-oval-horizontal-cutout.png?v=oval-table" alt="Educadora sorrindo com a grade de horários do Tec Escola no notebook e mesa oval" />
+                <img class="hero-person-base" src="./assets/educadora-uniforme-horizontal-cutout.png?v=hero-base-screen-15" alt="Educadora sorrindo com a grade de horários do Tec Escola no notebook e uniforme Tec Escola" />
+                <img class="hero-screen-overlay" src="./assets/educadora-grade-horario-horizontal-cutout.png?v=hero-screen-overlay-15" alt="" aria-hidden="true" />
               </figure>
               <figure class="hero-slide" data-hero-slide="1">
                 <img src="./assets/educadora-apontando-uniforme-horizontal-cutout.png?v=original-photo" alt="Educadora apontando para o painel acadêmico com uniforme Tec Escola" />
               </figure>
               <figure class="hero-slide" data-hero-slide="2">
-                <img src="./assets/educador-dashboard-uniforme-horizontal-cutout.png?v=original-photo" alt="Educador sorrindo com o dashboard do Tec Escola visível no notebook e uniforme Tec Escola" />
+                <img src="./assets/educador-dashboard-uniforme-horizontal-cutout.png?v=screen-dashboard-20261006-3" alt="Educador sorrindo com o dashboard do Tec Escola visível no notebook e uniforme Tec Escola" />
               </figure>
             </div>
           </div>
@@ -103,9 +106,9 @@
         </div>
 
         <div class="shell feature-grid">
-          <article class="feature-card feature-card-blue"><span class="feature-number">01</span><h3>Organize o dia a dia</h3><p>Grade, turmas, matrículas, frequência, notas e documentos em um só lugar.</p><a href="#perfis">Conhecer os perfis <span>↗</span></a></article>
-          <article class="feature-card"><span class="feature-number">02</span><h3>Comunique melhor</h3><p>Avisos, materiais e informações importantes chegam a quem precisa acompanhar.</p><a href="#diferenciais">Ver diferenciais <span>↗</span></a></article>
-          <article class="feature-card"><span class="feature-number">03</span><h3>Acompanhe a aprendizagem</h3><p>Atividades, Central de Estudos e recomendações ajudam a transformar dados em ação.</p><a href="#experiencia">Ver a experiência <span>↗</span></a></article>
+          <article class="feature-card is-active" data-feature-card><span class="feature-number">01</span><h3>Organize o dia a dia</h3><p>Grade, turmas, matrículas, frequência, notas e documentos em um só lugar.</p></article>
+          <article class="feature-card" data-feature-card><span class="feature-number">02</span><h3>Comunique melhor</h3><p>Avisos, materiais e informações importantes chegam a quem precisa acompanhar.</p></article>
+          <article class="feature-card" data-feature-card><span class="feature-number">03</span><h3>Acompanhe a aprendizagem</h3><p>Atividades, Central de Estudos e recomendações ajudam a transformar dados em ação.</p></article>
         </div>
       </section>
 
@@ -158,6 +161,42 @@
         </div>
       </section>
 
+      <section class="tv-school-section" id="tv-escola" aria-label="TV Escola no corredor da escola">
+        <div class="tv-school-visual">
+          <div class="tv-school-stage" aria-label="Conteúdos exibidos na TV Escola">
+            <div class="tv-school-slide is-active" data-tv-school-slide>
+              <img src="./assets/tv-escola-cardapio.png?v=tv-escola-23" alt="TV Escola exibindo o cardápio da cantina e uma homenagem à professora Fátima" />
+            </div>
+            <div class="tv-school-slide" data-tv-school-slide>
+              <img src="./assets/tv-escola-semana-livro.png?v=tv-escola-23" alt="TV Escola exibindo um aviso sobre a Semana do Livro" />
+            </div>
+            <div class="tv-school-slide" data-tv-school-slide>
+              <video class="tv-school-video" data-tv-school-video autoplay muted playsinline preload="metadata" aria-label="Vídeo da TV Escola">
+                <source src="./assets/tv-escola-video.mp4?v=tv-escola-23" type="video/mp4" />
+              </video>
+            </div>
+            <button class="tv-school-toggle" type="button" data-tv-school-toggle data-tv-school-feedback="play" aria-label="Pausar carrossel da TV Escola" aria-pressed="false" title="Pausar carrossel da TV Escola">
+              <span class="tv-school-toggle-icon" aria-hidden="true"></span>
+            </button>
+          </div>
+          <div class="tv-school-controls" aria-label="Conteúdos da TV Escola">
+            <button class="tv-school-dot is-active" type="button" data-tv-school-dot="0" aria-label="Exibir cardápio da cantina" aria-pressed="true"></button>
+            <button class="tv-school-dot" type="button" data-tv-school-dot="1" aria-label="Exibir Semana do Livro" aria-pressed="false"></button>
+            <button class="tv-school-dot" type="button" data-tv-school-dot="2" aria-label="Exibir vídeo da TV Escola" aria-pressed="false"></button>
+          </div>
+        </div>
+        <div class="tv-school-copy">
+          <div class="tv-school-copy-inner">
+            <h2>TV Escola: comunicação mais rápida, sustentável e eficiente</h2>
+            <p class="tv-school-lead">Com um simples clique, transforme a forma como sua instituição se comunica com alunos, professores e colaboradores.</p>
+            <p>Com a <strong>TV Escola</strong>, avisos, eventos, homenagens, cardápios, campanhas e informações importantes podem ser atualizados em poucos segundos.</p>
+            <p>Além de tornar a comunicação mais moderna, visual e dinâmica, a solução reduz a necessidade de impressões e o consumo de papel, contribuindo para uma escola mais sustentável e consciente com o meio ambiente.</p>
+            <p class="tv-school-highlight">Menos papel. Mais agilidade. Mais informação. Tudo em uma única tela.</p>
+            <a class="tv-school-more" href="./tv-escola.html?v=tv-escola-31">Saiba mais <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </section>
+
       <section class="demo-section" aria-labelledby="demonstracao-titulo">
         <div class="demo-layout">
           <div class="demo-copy">
@@ -194,7 +233,7 @@
       <section class="section section-light" id="diferenciais">
         <div class="shell differentiator-grid">
           <div class="differentiator-copy"><p class="eyebrow">ALÉM DA GESTÃO</p><h2>Ferramentas que aproximam a escola de verdade.</h2><p class="section-lead">O Tec Escola foi pensado para que a tecnologia reduza a distância entre informação, decisão e aprendizagem.</p><div class="differentiator-list"><div><b>TV Escola</b><span>Leve avisos e comunicados para os espaços da instituição.</span></div><div><b>Central de Estudos</b><span>Ajude o aluno a continuar aprendendo além da aula.</span></div><div><b>Personalização</b><span>Uma experiência digital com a identidade da sua escola.</span></div></div></div>
-          <div class="stacked-panels" aria-label="Recursos de destaque do Tec Escola"><div class="stack-panel panel-back"><span>IDENTIDADE DA ESCOLA</span><b>Seu sistema, do seu jeito.</b></div><div class="stack-panel panel-middle"><span>TV ESCOLA</span><b>Informação onde a comunidade está.</b></div><div class="stack-panel panel-front"><span>CENTRAL DE ESTUDOS</span><b>O próximo passo do aluno mais claro.</b><div class="panel-progress"><i></i><i></i><i></i></div></div></div>
+          <div class="stacked-panels" data-stack-panels data-stack-active="0" aria-label="Recursos de destaque do Tec Escola"><div class="stack-panel panel-back" data-stack-panel="2"><span>IDENTIDADE DA ESCOLA</span><b>Seu sistema, do seu jeito.</b><div class="panel-progress" aria-hidden="true"><i></i><i></i><i></i></div></div><div class="stack-panel panel-middle" data-stack-panel="1"><span>TV ESCOLA</span><b>Informação onde a comunidade está.</b><div class="panel-progress" aria-hidden="true"><i></i><i></i><i></i></div></div><div class="stack-panel panel-front is-active" data-stack-panel="0"><span>CENTRAL DE ESTUDOS</span><b>O próximo passo do aluno mais claro.</b><div class="panel-progress" aria-hidden="true"><i></i><i></i><i></i></div></div></div>
         </div>
       </section>
 
@@ -218,6 +257,6 @@
       <span class="whatsapp-tooltip" id="whatsapp-tooltip" role="tooltip">Entre em contato agora com nossos consultores. Saiba mais.</span>
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.84 11.84 0 0 0 12.08 0C5.53 0 .2 5.33.2 11.88c0 2.09.55 4.13 1.59 5.93L.1 24l6.35-1.67a11.84 11.84 0 0 0 5.63 1.43h.01c6.55 0 11.88-5.33 11.88-11.88 0-3.17-1.24-6.15-3.45-8.4zm-8.44 18.2h-.01a9.85 9.85 0 0 1-5.02-1.37l-.36-.22-3.77.99 1.01-3.68-.23-.38a9.84 9.84 0 0 1-1.51-5.14C2.19 6.43 6.62 2 12.08 2c2.64 0 5.12 1.03 6.98 2.9a9.82 9.82 0 0 1 2.88 6.98c0 5.46-4.43 9.88-9.86 9.88zm5.42-7.4c-.3-.15-1.78-.88-2.06-.98-.28-.1-.48-.15-.69.15-.2.31-.79.98-.97 1.18-.18.2-.36.23-.66.08-.31-.15-1.3-.48-2.48-1.53-.92-.82-1.54-1.83-1.72-2.14-.18-.31-.02-.48.14-.63.14-.14.31-.36.46-.54.15-.18.2-.31.31-.51.1-.2.05-.38-.03-.54-.08-.15-.69-1.66-.95-2.27-.25-.6-.5-.52-.69-.53h-.59c-.2 0-.54.08-.82.38-.28.31-1.07 1.05-1.07 2.56s1.1 2.97 1.25 3.18c.15.2 2.16 3.3 5.23 4.63.73.32 1.3.51 1.74.65.73.23 1.4.2 1.93.12.59-.09 1.78-.73 2.03-1.43.25-.71.25-1.31.18-1.43-.08-.13-.28-.2-.58-.35z"></path></svg>
     </a>
-    <script src="./script.js?v=remove-final-sections"></script>
+    <script src="./script.js?v=tv-escola-57"></script>
   </body>
 </html>

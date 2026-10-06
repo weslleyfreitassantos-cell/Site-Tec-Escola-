@@ -7,6 +7,8 @@ const screenLabel = document.querySelector('[data-screen-label]');
 const screenTitle = document.querySelector('[data-screen-title]');
 const caption = document.querySelector('[data-caption]');
 const screenContent = document.querySelector('[data-screen-content]');
+const featureCards = [...document.querySelectorAll('[data-feature-card]')];
+const featureGrid = document.querySelector('.feature-grid');
 const hero = document.querySelector('.hero');
 const heroPerson = document.querySelector('.hero-person');
 const heroSlides = [...document.querySelectorAll('[data-hero-slide]')];
@@ -17,13 +19,45 @@ const phoneTabs = [...document.querySelectorAll('[data-phone-tab]')];
 const phoneStage = document.querySelector('.phone-stage');
 const phoneDevice = document.querySelector('.phone-device');
 const navLinks = [...document.querySelectorAll('.desktop-nav a')];
+const navTargets = navLinks.map((link) => {
+  const target = document.querySelector(link.getAttribute('href'));
+  return target?.closest('section') || target;
+});
+let activeNavLockUntil = 0;
+const tvSchoolSlides = [...document.querySelectorAll('[data-tv-school-slide]')];
+const tvSchoolDots = [...document.querySelectorAll('[data-tv-school-dot]')];
+const tvSchoolVideos = [...document.querySelectorAll('[data-tv-school-video]')];
+const tvSchoolStage = document.querySelector('.tv-school-stage');
+const tvSchoolToggle = document.querySelector('[data-tv-school-toggle]');
 const differentialsNav = document.querySelector('[data-differentials-nav]');
 const differentialsSection = document.querySelector('#diferenciais');
+const stackedPanels = document.querySelector('[data-stack-panels]');
+const stackPanels = [...document.querySelectorAll('[data-stack-panel]')].sort((firstPanel, secondPanel) => (
+  Number(firstPanel.dataset.stackPanel) - Number(secondPanel.dataset.stackPanel)
+));
 const whatsappLink = document.querySelector('[data-whatsapp-link]');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let heroIndex = 0;
 let heroTimer;
 let phoneTimer;
+let tvSchoolTimer;
+let tvSchoolFeedbackTimer;
+let tvSchoolPaused = false;
+const TV_SCHOOL_SLIDE_DURATION = 3000;
+let featureCardTimer;
+let featureCardsInView = false;
+let stackPanelTimer;
+let stackPanelsInView = false;
+const STACK_PANEL_DURATION = 2200;
+
+function playTvSchoolVideo(video) {
+  if (!video || tvSchoolPaused) return;
+  video.muted = true;
+  video.defaultMuted = true;
+  video.setAttribute('muted', '');
+  video.setAttribute('playsinline', '');
+  video.play().catch(() => {});
+}
 
 const whatsappNumber = (whatsappLink?.dataset.whatsappNumber || '5571987336205').replace(/\D/g, '');
 const getWhatsappUrl = (message = '') => {
@@ -57,6 +91,46 @@ function setActiveNav(link) {
     if (isActive) navLink.setAttribute('aria-current', 'page');
     else navLink.removeAttribute('aria-current');
   });
+}
+
+function updateActiveNavFromScroll() {
+  if (Date.now() < activeNavLockUntil) return;
+
+  const marker = window.scrollY + (header?.offsetHeight || 78) + 32;
+  let activeIndex = 0;
+
+  navTargets.forEach((target, index) => {
+    const targetTop = target ? target.getBoundingClientRect().top + window.scrollY : Infinity;
+    if (targetTop <= marker) activeIndex = index;
+  });
+
+  setActiveNav(navLinks[activeIndex]);
+}
+
+function scheduleActiveNavSync(delay = 1040) {
+  window.setTimeout(() => {
+    if (window.location.hash) updateActiveNavFromHash();
+    else updateActiveNavFromScroll();
+  }, delay);
+}
+
+function updateActiveNavFromHash(lockDuration = 0) {
+  const hash = window.location.hash;
+  if (!hash) return;
+  const activeLink = navLinks.find((link) => link.getAttribute('href') === hash);
+  if (activeLink) {
+    setActiveNav(activeLink);
+    if (lockDuration) {
+      activeNavLockUntil = Date.now() + lockDuration;
+      scheduleActiveNavSync(lockDuration + 40);
+    }
+  }
+}
+
+function syncNavigationState() {
+  updateHeader();
+  if (window.location.hash) updateActiveNavFromHash(1000);
+  else updateActiveNavFromScroll();
 }
 
 const screens = {
@@ -141,6 +215,95 @@ function restartPhoneTimer() {
   }
 }
 
+function setActiveFeatureCard(nextIndex) {
+  if (!featureCards.length) return;
+  const activeIndex = (nextIndex + featureCards.length) % featureCards.length;
+  featureCards.forEach((card, index) => card.classList.toggle('is-active', index === activeIndex));
+}
+
+function restartFeatureCardTimer() {
+  window.clearInterval(featureCardTimer);
+  if (reduceMotion || featureCards.length < 2 || !featureCardsInView) return;
+  featureCardTimer = window.setInterval(() => {
+    const activeIndex = featureCards.findIndex((card) => card.classList.contains('is-active'));
+    setActiveFeatureCard(activeIndex + 1);
+  }, 1000);
+}
+
+function setActiveStackPanel(nextIndex) {
+  if (!stackedPanels || !stackPanels.length) return;
+  const activeIndex = (nextIndex + stackPanels.length) % stackPanels.length;
+  stackedPanels.dataset.stackActive = String(activeIndex);
+  stackPanels.forEach((panel, index) => {
+    const isActive = index === activeIndex;
+    panel.classList.toggle('is-active', isActive);
+    const progress = panel.querySelector('.panel-progress');
+    progress?.classList.toggle('is-active', isActive);
+    if (progress) progress.style.opacity = isActive ? '1' : '0';
+    panel.querySelectorAll('.panel-progress i').forEach((indicator, indicatorIndex) => {
+      indicator.classList.toggle('is-current', isActive && indicatorIndex === activeIndex);
+    });
+  });
+}
+
+function restartStackPanelTimer() {
+  window.clearInterval(stackPanelTimer);
+  if (stackPanels.length < 2) return;
+  stackPanelTimer = window.setInterval(() => {
+    const activeIndex = stackPanels.findIndex((panel) => panel.classList.contains('is-active'));
+    setActiveStackPanel(activeIndex + 1);
+  }, STACK_PANEL_DURATION);
+}
+
+function setTvSchoolSlide(nextIndex) {
+  if (!tvSchoolSlides.length) return;
+  const activeIndex = (nextIndex + tvSchoolSlides.length) % tvSchoolSlides.length;
+  tvSchoolVideos.forEach((video) => {
+    video.pause();
+    video.currentTime = 0;
+  });
+  tvSchoolSlides.forEach((slide, index) => slide.classList.toggle('is-active', index === activeIndex));
+  tvSchoolDots.forEach((dot, index) => {
+    const isActive = index === activeIndex;
+    dot.classList.toggle('is-active', isActive);
+    dot.setAttribute('aria-pressed', String(isActive));
+  });
+  const activeVideo = tvSchoolSlides[activeIndex].querySelector('[data-tv-school-video]');
+  playTvSchoolVideo(activeVideo);
+}
+
+function restartTvSchoolTimer() {
+  window.clearTimeout(tvSchoolTimer);
+  if (reduceMotion || tvSchoolSlides.length < 2) return;
+  const activeIndex = tvSchoolSlides.findIndex((slide) => slide.classList.contains('is-active'));
+  tvSchoolTimer = window.setTimeout(() => {
+    setTvSchoolSlide(activeIndex + 1);
+    restartTvSchoolTimer();
+  }, TV_SCHOOL_SLIDE_DURATION);
+}
+
+function setTvSchoolPaused(paused) {
+  tvSchoolPaused = paused;
+  window.clearTimeout(tvSchoolFeedbackTimer);
+  tvSchoolStage?.classList.toggle('is-paused', paused);
+  tvSchoolStage?.classList.toggle('is-feedback', !paused);
+  tvSchoolToggle?.setAttribute('aria-pressed', String(paused));
+  tvSchoolToggle?.setAttribute('aria-label', paused ? 'Retomar carrossel da TV Escola' : 'Pausar carrossel da TV Escola');
+  tvSchoolToggle?.setAttribute('title', paused ? 'Retomar carrossel da TV Escola' : 'Pausar carrossel da TV Escola');
+  tvSchoolToggle?.setAttribute('data-tv-school-feedback', paused ? 'pause' : 'play');
+
+  const activeVideo = tvSchoolSlides.find((slide) => slide.classList.contains('is-active'))?.querySelector('[data-tv-school-video]');
+  if (paused) {
+    window.clearTimeout(tvSchoolTimer);
+    activeVideo?.pause();
+    return;
+  }
+
+  playTvSchoolVideo(activeVideo);
+  restartTvSchoolTimer();
+  tvSchoolFeedbackTimer = window.setTimeout(() => tvSchoolStage?.classList.remove('is-feedback'), 800);
+}
+
 function setScreen(name) {
   const screen = screens[name];
   if (!screen) return;
@@ -159,13 +322,21 @@ function setScreen(name) {
 
 window.addEventListener('scroll', updateHeader, { passive: true });
 window.addEventListener('scroll', updateScrollMotion, { passive: true });
-updateHeader();
+window.addEventListener('scroll', updateActiveNavFromScroll, { passive: true });
+window.addEventListener('hashchange', () => window.setTimeout(syncNavigationState, 0));
+syncNavigationState();
 updateScrollMotion();
+window.setTimeout(syncNavigationState, 0);
 setHeroSlide(0);
 restartHeroTimer();
 setPhoneScene('dashboard');
 restartPhoneTimer();
 setScreen('dashboard');
+setActiveFeatureCard(0);
+setActiveStackPanel(0);
+restartStackPanelTimer();
+setTvSchoolSlide(0);
+restartTvSchoolTimer();
 
 phoneTabs.forEach((tab) => tab.addEventListener('click', () => {
   setPhoneScene(tab.dataset.phoneTab);
@@ -174,8 +345,66 @@ phoneTabs.forEach((tab) => tab.addEventListener('click', () => {
 phoneStage?.addEventListener('mouseenter', () => window.clearInterval(phoneTimer));
 phoneStage?.addEventListener('mouseleave', restartPhoneTimer);
 
-navLinks.forEach((link) => link.addEventListener('click', () => setActiveNav(link)));
-setActiveNav(navLinks.find((link) => link.getAttribute('href') === window.location.hash));
+tvSchoolDots.forEach((dot) => dot.addEventListener('click', () => {
+  setTvSchoolSlide(Number(dot.dataset.tvSchoolDot));
+  if (!tvSchoolPaused) restartTvSchoolTimer();
+}));
+
+tvSchoolToggle?.addEventListener('click', (event) => {
+  event.stopPropagation();
+  setTvSchoolPaused(!tvSchoolPaused);
+});
+
+tvSchoolStage?.addEventListener('click', (event) => {
+  if (event.target.closest('[data-tv-school-dot], [data-tv-school-toggle]')) return;
+  setTvSchoolPaused(!tvSchoolPaused);
+});
+
+tvSchoolVideos.forEach((video) => video.addEventListener('ended', () => {
+  const activeIndex = tvSchoolSlides.findIndex((slide) => slide.classList.contains('is-active'));
+  if (tvSchoolSlides[activeIndex]?.contains(video)) {
+    setTvSchoolSlide(activeIndex + 1);
+    restartTvSchoolTimer();
+  }
+}));
+
+const tvSchoolVisibilityObserver = tvSchoolStage ? new IntersectionObserver(([entry]) => {
+  const activeVideo = tvSchoolSlides.find((slide) => slide.classList.contains('is-active'))?.querySelector('[data-tv-school-video]');
+  if (entry.isIntersecting) {
+    playTvSchoolVideo(activeVideo);
+  } else if (!tvSchoolPaused) {
+    activeVideo?.pause();
+  }
+}, { threshold: .35 }) : null;
+tvSchoolVisibilityObserver?.observe(tvSchoolStage);
+
+const featureVisibilityObserver = featureGrid ? new IntersectionObserver(([entry]) => {
+  featureCardsInView = entry.isIntersecting;
+  if (entry.isIntersecting) {
+    setActiveFeatureCard(0);
+    restartFeatureCardTimer();
+  } else {
+    window.clearInterval(featureCardTimer);
+  }
+}, { threshold: .25 }) : null;
+featureVisibilityObserver?.observe(featureGrid);
+
+const stackPanelsVisibilityObserver = stackedPanels ? new IntersectionObserver(([entry]) => {
+  stackPanelsInView = entry.isIntersecting;
+  if (entry.isIntersecting) {
+    setActiveStackPanel(0);
+    restartStackPanelTimer();
+  } else {
+    window.clearInterval(stackPanelTimer);
+  }
+}, { threshold: .25 }) : null;
+stackPanelsVisibilityObserver?.observe(stackedPanels);
+
+navLinks.forEach((link) => link.addEventListener('click', () => {
+  setActiveNav(link);
+  activeNavLockUntil = Date.now() + 1000;
+  scheduleActiveNavSync();
+}));
 
 differentialsNav?.addEventListener('mouseenter', () => differentialsSection?.classList.add('is-previewing'));
 differentialsNav?.addEventListener('mouseleave', () => differentialsSection?.classList.remove('is-previewing'));
