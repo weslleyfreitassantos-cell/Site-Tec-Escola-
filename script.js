@@ -23,6 +23,7 @@ const navTargets = navLinks.map((link) => {
   const target = document.querySelector(link.getAttribute('href'));
   return target?.closest('section') || target;
 });
+let activeNavLockUntil = 0;
 const tvSchoolSlides = [...document.querySelectorAll('[data-tv-school-slide]')];
 const tvSchoolDots = [...document.querySelectorAll('[data-tv-school-dot]')];
 const tvSchoolVideos = [...document.querySelectorAll('[data-tv-school-video]')];
@@ -91,14 +92,43 @@ function setActiveNav(link) {
 }
 
 function updateActiveNavFromScroll() {
-  const marker = window.scrollY + (header?.offsetHeight || 78) + 16;
+  if (Date.now() < activeNavLockUntil) return;
+
+  const marker = window.scrollY + (header?.offsetHeight || 78) + 32;
   let activeIndex = 0;
 
   navTargets.forEach((target, index) => {
-    if (target && target.offsetTop <= marker) activeIndex = index;
+    const targetTop = target ? target.getBoundingClientRect().top + window.scrollY : Infinity;
+    if (targetTop <= marker) activeIndex = index;
   });
 
   setActiveNav(navLinks[activeIndex]);
+}
+
+function scheduleActiveNavSync(delay = 1040) {
+  window.setTimeout(() => {
+    if (window.location.hash) updateActiveNavFromHash();
+    else updateActiveNavFromScroll();
+  }, delay);
+}
+
+function updateActiveNavFromHash(lockDuration = 0) {
+  const hash = window.location.hash;
+  if (!hash) return;
+  const activeLink = navLinks.find((link) => link.getAttribute('href') === hash);
+  if (activeLink) {
+    setActiveNav(activeLink);
+    if (lockDuration) {
+      activeNavLockUntil = Date.now() + lockDuration;
+      scheduleActiveNavSync(lockDuration + 40);
+    }
+  }
+}
+
+function syncNavigationState() {
+  updateHeader();
+  if (window.location.hash) updateActiveNavFromHash(1000);
+  else updateActiveNavFromScroll();
 }
 
 const screens = {
@@ -285,9 +315,10 @@ function setScreen(name) {
 window.addEventListener('scroll', updateHeader, { passive: true });
 window.addEventListener('scroll', updateScrollMotion, { passive: true });
 window.addEventListener('scroll', updateActiveNavFromScroll, { passive: true });
-updateHeader();
+window.addEventListener('hashchange', () => window.setTimeout(syncNavigationState, 0));
+syncNavigationState();
 updateScrollMotion();
-updateActiveNavFromScroll();
+window.setTimeout(syncNavigationState, 0);
 setHeroSlide(0);
 restartHeroTimer();
 setPhoneScene('dashboard');
@@ -361,7 +392,11 @@ const stackPanelsVisibilityObserver = stackedPanels ? new IntersectionObserver((
 }, { threshold: .25 }) : null;
 stackPanelsVisibilityObserver?.observe(stackedPanels);
 
-navLinks.forEach((link) => link.addEventListener('click', () => setActiveNav(link)));
+navLinks.forEach((link) => link.addEventListener('click', () => {
+  setActiveNav(link);
+  activeNavLockUntil = Date.now() + 1000;
+  scheduleActiveNavSync();
+}));
 
 differentialsNav?.addEventListener('mouseenter', () => differentialsSection?.classList.add('is-previewing'));
 differentialsNav?.addEventListener('mouseleave', () => differentialsSection?.classList.remove('is-previewing'));

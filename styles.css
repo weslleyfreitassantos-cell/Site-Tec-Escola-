@@ -60,10 +60,12 @@ h3 { font-size: 21px; line-height: 1.1; }
 .desktop-nav a:hover, .text-link:hover { opacity: 1; }
 .desktop-nav a { position: relative; }
 .desktop-nav a::after { position: absolute; right: 0; bottom: -9px; left: 0; height: 2px; border-radius: 2px; background: var(--cyan); content: ""; transform: scaleX(0); transform-origin: right; transition: transform .3s ease; }
-.desktop-nav a:hover, .desktop-nav a:focus-visible { color: var(--cyan); transform: translateY(-2px); }
-.desktop-nav a:hover::after, .desktop-nav a:focus-visible::after { transform: scaleX(1); transform-origin: left; }
+.desktop-nav a:hover, .desktop-nav a:focus-visible { transform: translateY(-2px); }
+.desktop-nav a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
 .desktop-nav a.is-active { color: var(--cyan); transform: translateY(-2px); }
 .desktop-nav a.is-active::after { transform: scaleX(1); transform-origin: left; }
+.site-header.is-scrolled .desktop-nav a.is-active { color: #0b50bb; }
+.site-header.is-scrolled .desktop-nav a::after { background: #0b50bb; }
 .header-actions { display: flex; align-items: center; gap: 18px; font-size: 16px; font-weight: 800; }
 .menu-button { display: none; border: 0; background: none; color: currentColor; }
 .menu-button span { display: block; width: 22px; height: 2px; margin: 4px; background: currentColor; }
