@@ -38,6 +38,7 @@ let phoneTimer;
 let tvSchoolTimer;
 let tvSchoolFeedbackTimer;
 let tvSchoolPaused = false;
+const TV_SCHOOL_SLIDE_DURATION = 3000;
 let featureCardTimer;
 let featureCardsInView = false;
 
@@ -213,11 +214,10 @@ function restartTvSchoolTimer() {
   window.clearTimeout(tvSchoolTimer);
   if (reduceMotion || tvSchoolSlides.length < 2) return;
   const activeIndex = tvSchoolSlides.findIndex((slide) => slide.classList.contains('is-active'));
-  if (tvSchoolSlides[activeIndex].querySelector('[data-tv-school-video]')) return;
   tvSchoolTimer = window.setTimeout(() => {
     setTvSchoolSlide(activeIndex + 1);
     restartTvSchoolTimer();
-  }, 3000);
+  }, TV_SCHOOL_SLIDE_DURATION);
 }
 
 function setTvSchoolPaused(paused) {
