@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=tv-escola-56" />
+    <link rel="stylesheet" href="./styles.css?v=tv-escola-57" />
   </head>
   <body class="tv-school-detail-page">
     <header class="site-header is-scrolled" data-header>
@@ -70,7 +70,7 @@
             </article>
             <article class="tv-school-detail-card tv-school-detail-video-card">
               <div class="tv-school-detail-media">
-                <video src="./assets/tv-escola-video.mp4?v=tv-escola-33" controls muted playsinline preload="auto" data-tv-school-hover-video data-tv-school-mobile-autoplay aria-label="Vídeo de apresentação da TV Escola"></video>
+                <video src="./assets/tv-escola-video.mp4?v=tv-escola-33" controls autoplay muted playsinline preload="auto" data-tv-school-hover-video data-tv-school-mobile-autoplay aria-label="Vídeo de apresentação da TV Escola"></video>
               </div>
               <div class="tv-school-detail-card-copy"><h3>Mensagens em movimento</h3><p>Use vídeos e conteúdos dinâmicos para aproximar alunos, famílias, professores e colaboradores.</p></div>
             </article>
@@ -121,6 +121,9 @@
       const playVideoPreview = () => {
         if (!hoverVideo) return;
         hoverVideo.muted = true;
+        hoverVideo.defaultMuted = true;
+        hoverVideo.setAttribute('muted', '');
+        hoverVideo.setAttribute('playsinline', '');
         if (hoverVideo.ended) hoverVideo.currentTime = 0;
         hoverVideo.play().catch(() => {});
       };
@@ -139,10 +142,13 @@
       const mobileViewport = window.matchMedia('(max-width: 760px)');
       const startMobileVideo = () => {
         if (!hoverVideo || !mobileViewport.matches) return;
-        hoverVideo.muted = true;
-        if (hoverVideo.ended) hoverVideo.currentTime = 0;
-        hoverVideo.play().catch(() => {});
+        playVideoPreview();
       };
+      const mobileVideoObserver = hoverVideo ? new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting && mobileViewport.matches) startMobileVideo();
+      }, { threshold: .2 }) : null;
+      mobileVideoObserver?.observe(hoverVideo);
+      ['loadeddata', 'canplay'].forEach((eventName) => hoverVideo?.addEventListener(eventName, startMobileVideo));
       startMobileVideo();
       mobileViewport.addEventListener?.('change', startMobileVideo);
 
