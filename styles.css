@@ -249,7 +249,7 @@ h3 { font-size: 21px; line-height: 1.1; }
 .tv-school-detail-cta { padding: 68px 0 92px; text-align: center; background: #fff; }
 .tv-school-detail-cta h2 { max-width: 680px; margin: 0 auto; color: var(--navy); font-size: clamp(34px, 4vw, 54px); }
 @media (min-width: 761px) {
-  .hero-person { --hero-lift: clamp(-157px, calc(31.6vw - 559px), -22px); --hero-scale: .96; }
+  .hero-person { --hero-lift: clamp(-87px, calc(15.2vw - 280px), -22px); --hero-scale: .96; }
   .tv-school-detail-hero-inner,
   .tv-school-detail-gallery > .shell,
   .tv-school-detail-usecases > .shell { width: min(100% - clamp(48px, 7vw, 120px), 1680px); }
