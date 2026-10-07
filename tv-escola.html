@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=tv-escola-61" />
+    <link rel="stylesheet" href="./styles.css?v=tv-escola-68" />
   </head>
   <body class="tv-school-detail-page">
     <header class="site-header is-scrolled" data-header>
@@ -29,6 +29,7 @@
         <a href="./index.html#tv-escola" aria-current="page">TV Escola</a>
         <a href="./index.html#demonstracao">Cadastre-se</a>
         <a href="./index.html#diferenciais">Diferenciais</a>
+        <a class="mobile-nav-access" href="https://admin.grupotec.dev.br">Acessar</a>
       </nav>
 
       <div class="header-actions"><a class="text-link" href="https://admin.grupotec.dev.br">Acessar</a></div>
@@ -38,9 +39,30 @@
     <main class="tv-school-detail">
       <section class="tv-school-detail-hero" aria-labelledby="tv-school-detail-title">
         <div class="shell tv-school-detail-hero-inner">
-          <p class="eyebrow">TV ESCOLA</p>
-          <h1 id="tv-school-detail-title">Personalize a tela da sua <em>TV Escola</em> do seu jeito.</h1>
-          <p class="tv-school-detail-hero-lead">Transforme cada tela em um ponto de informação para a comunidade escolar, com conteúdos que fazem sentido para a rotina da sua instituição.</p>
+          <div class="tv-school-detail-hero-copy">
+            <p class="eyebrow">TV ESCOLA</p>
+            <h1 id="tv-school-detail-title">Personalize a tela da sua <em>TV Escola</em> do seu jeito.</h1>
+            <p class="tv-school-detail-hero-lead">Transforme cada tela em um ponto de informação para a comunidade escolar, com conteúdos que fazem sentido para a rotina da sua instituição.</p>
+          </div>
+
+          <div class="tv-school-detail-hero-media">
+            <div class="tv-school-computer">
+              <div class="tv-school-computer-screen">
+                <span class="tv-school-computer-camera" aria-hidden="true"></span>
+                <div class="tv-school-computer-bezel">
+                  <div class="tv-school-computer-browser-bar" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                    <small>app.tecescola.grupotec.dev.br</small>
+                  </div>
+                  <div class="tv-school-computer-display">
+                    <video src="./assets/tv-escola-hero-video.mp4?v=tv-escola-hero-4" preload="auto" autoplay muted playsinline webkit-playsinline controls data-tv-school-hero-video aria-label="Demonstração da plataforma Tec Escola"></video>
+                  </div>
+                </div>
+              </div>
+              <div class="tv-school-computer-hinge" aria-hidden="true"></div>
+              <div class="tv-school-computer-base" aria-hidden="true"><span></span></div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -70,7 +92,7 @@
             </article>
             <article class="tv-school-detail-card tv-school-detail-video-card">
               <div class="tv-school-detail-media">
-                <video src="./assets/tv-escola-video.mp4?v=tv-escola-33" controls autoplay muted playsinline preload="auto" data-tv-school-hover-video data-tv-school-mobile-autoplay aria-label="Vídeo de apresentação da TV Escola"></video>
+                <video src="./assets/tv-escola-video.mp4?v=tv-escola-36" controls autoplay muted playsinline webkit-playsinline preload="auto" data-tv-school-hover-video data-tv-school-mobile-autoplay aria-label="Vídeo de apresentação da TV Escola"></video>
               </div>
               <div class="tv-school-detail-card-copy"><h3>Mensagens em movimento</h3><p>Use vídeos e conteúdos dinâmicos para aproximar alunos, famílias, professores e colaboradores.</p></div>
             </article>
@@ -118,12 +140,30 @@
 
       const hoverVideo = document.querySelector('[data-tv-school-hover-video]');
       const hoverVideoCard = hoverVideo?.closest('[data-tv-school-video-card], .tv-school-detail-video-card');
+      const trackVideoAudioPreference = (video) => {
+        if (!video || video.dataset.audioPreferenceTracked) return;
+        video.dataset.audioPreferenceTracked = 'true';
+        video.addEventListener('volumechange', () => {
+          if (!video.muted) video.dataset.userUnmuted = 'true';
+        });
+      };
+      const prepareMutedInlineVideo = (video) => {
+        if (!video) return;
+        trackVideoAudioPreference(video);
+        video.autoplay = true;
+        video.playsInline = true;
+        video.setAttribute('autoplay', '');
+        video.setAttribute('playsinline', '');
+        video.setAttribute('webkit-playsinline', '');
+        if (video.dataset.userUnmuted !== 'true') {
+          video.muted = true;
+          video.defaultMuted = true;
+          video.setAttribute('muted', '');
+        }
+      };
       const playVideoPreview = () => {
         if (!hoverVideo) return;
-        hoverVideo.muted = true;
-        hoverVideo.defaultMuted = true;
-        hoverVideo.setAttribute('muted', '');
-        hoverVideo.setAttribute('playsinline', '');
+        prepareMutedInlineVideo(hoverVideo);
         if (hoverVideo.ended) hoverVideo.currentTime = 0;
         hoverVideo.play().catch(() => {});
       };
@@ -151,6 +191,34 @@
       ['loadeddata', 'canplay'].forEach((eventName) => hoverVideo?.addEventListener(eventName, startMobileVideo));
       startMobileVideo();
       mobileViewport.addEventListener?.('change', startMobileVideo);
+
+      const heroVideo = document.querySelector('[data-tv-school-hero-video]');
+      const playHeroVideo = () => {
+        if (!heroVideo) return;
+        prepareMutedInlineVideo(heroVideo);
+        heroVideo.play().catch(() => {});
+      };
+      const heroVideoObserver = heroVideo ? new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) playHeroVideo();
+        else heroVideo.pause();
+      }, { threshold: .25 }) : null;
+      heroVideoObserver?.observe(heroVideo);
+      ['loadedmetadata', 'loadeddata', 'canplay', 'canplaythrough'].forEach((eventName) => heroVideo?.addEventListener(eventName, playHeroVideo));
+      window.addEventListener('pageshow', playHeroVideo);
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState !== 'hidden') playHeroVideo();
+      });
+      const startVisibleVideosFromGesture = () => {
+        const heroRect = heroVideo?.getBoundingClientRect();
+        if (heroRect && heroRect.bottom > 0 && heroRect.top < window.innerHeight && heroVideo.paused && heroVideo.currentTime < .15) playHeroVideo();
+        if (hoverVideoCard && mobileViewport.matches) {
+          const galleryRect = hoverVideoCard.getBoundingClientRect();
+          if (galleryRect.bottom > 0 && galleryRect.top < window.innerHeight && hoverVideo.paused && hoverVideo.currentTime < .15) playVideoPreview();
+        }
+      };
+      document.addEventListener('touchstart', startVisibleVideosFromGesture, { passive: true });
+      document.addEventListener('touchend', startVisibleVideosFromGesture, { passive: true });
+      playHeroVideo();
 
       const lightbox = document.querySelector('[data-tv-school-lightbox]');
       const lightboxImage = document.querySelector('[data-tv-school-lightbox-image]');

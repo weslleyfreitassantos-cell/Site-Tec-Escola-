@@ -18,7 +18,7 @@ const phoneImage = document.querySelector('[data-phone-image]');
 const phoneTabs = [...document.querySelectorAll('[data-phone-tab]')];
 const phoneStage = document.querySelector('.phone-stage');
 const phoneDevice = document.querySelector('.phone-device');
-const navLinks = [...document.querySelectorAll('.desktop-nav a')];
+const navLinks = [...document.querySelectorAll('.desktop-nav a:not(.mobile-nav-access)')];
 const navTargets = navLinks.map((link) => {
   const target = document.querySelector(link.getAttribute('href'));
   return target?.closest('section') || target;
@@ -50,13 +50,40 @@ let stackPanelTimer;
 let stackPanelsInView = false;
 const STACK_PANEL_DURATION = 2200;
 
+function trackVideoAudioPreference(video) {
+  if (!video || video.dataset.audioPreferenceTracked) return;
+  video.dataset.audioPreferenceTracked = 'true';
+  video.addEventListener('volumechange', () => {
+    if (!video.muted) video.dataset.userUnmuted = 'true';
+  });
+}
+
+function prepareMutedInlineVideo(video) {
+  if (!video) return;
+  trackVideoAudioPreference(video);
+  video.autoplay = true;
+  video.playsInline = true;
+  video.setAttribute('autoplay', '');
+  video.setAttribute('playsinline', '');
+  video.setAttribute('webkit-playsinline', '');
+  if (video.dataset.userUnmuted !== 'true') {
+    video.muted = true;
+    video.defaultMuted = true;
+    video.setAttribute('muted', '');
+  }
+}
+
 function playTvSchoolVideo(video) {
   if (!video || tvSchoolPaused) return;
-  video.muted = true;
-  video.defaultMuted = true;
-  video.setAttribute('muted', '');
-  video.setAttribute('playsinline', '');
-  video.play().catch(() => {});
+  prepareMutedInlineVideo(video);
+  const attemptPlayback = () => {
+    prepareMutedInlineVideo(video);
+    video.play().catch(() => {});
+  };
+  if (video.readyState >= 2) attemptPlayback();
+  ['loadedmetadata', 'loadeddata', 'canplay'].forEach((eventName) => {
+    video.addEventListener(eventName, attemptPlayback, { once: true });
+  });
 }
 
 const whatsappNumber = (whatsappLink?.dataset.whatsappNumber || '5571987336205').replace(/\D/g, '');
@@ -377,6 +404,27 @@ const tvSchoolVisibilityObserver = tvSchoolStage ? new IntersectionObserver(([en
   }
 }, { threshold: .35 }) : null;
 tvSchoolVisibilityObserver?.observe(tvSchoolStage);
+const playVisibleTvSchoolVideoFromGesture = () => {
+  if (!tvSchoolStage || tvSchoolPaused) return;
+  const stageRect = tvSchoolStage.getBoundingClientRect();
+  if (stageRect.bottom <= 0 || stageRect.top >= window.innerHeight) return;
+  const activeVideo = tvSchoolSlides.find((slide) => slide.classList.contains('is-active'))?.querySelector('[data-tv-school-video]');
+  if (activeVideo?.paused) playTvSchoolVideo(activeVideo);
+};
+tvSchoolStage?.addEventListener('touchend', playVisibleTvSchoolVideoFromGesture, { passive: true });
+window.addEventListener('touchstart', playVisibleTvSchoolVideoFromGesture, { passive: true });
+window.addEventListener('touchend', playVisibleTvSchoolVideoFromGesture, { passive: true });
+window.addEventListener('pointerup', playVisibleTvSchoolVideoFromGesture, { passive: true });
+window.addEventListener('pageshow', () => {
+  const activeVideo = tvSchoolSlides.find((slide) => slide.classList.contains('is-active'))?.querySelector('[data-tv-school-video]');
+  if (activeVideo?.paused) playTvSchoolVideo(activeVideo);
+});
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState !== 'hidden') {
+    const activeVideo = tvSchoolSlides.find((slide) => slide.classList.contains('is-active'))?.querySelector('[data-tv-school-video]');
+    if (activeVideo?.paused) playTvSchoolVideo(activeVideo);
+  }
+});
 
 const featureVisibilityObserver = featureGrid ? new IntersectionObserver(([entry]) => {
   featureCardsInView = entry.isIntersecting;
