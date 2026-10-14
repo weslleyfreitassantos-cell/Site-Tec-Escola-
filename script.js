@@ -36,7 +36,19 @@ const stackPanels = [...document.querySelectorAll('[data-stack-panel]')].sort((f
   Number(firstPanel.dataset.stackPanel) - Number(secondPanel.dataset.stackPanel)
 ));
 const whatsappLink = document.querySelector('[data-whatsapp-link]');
+const cookieBanner = document.querySelector('[data-cookie-banner]');
+const cookieAcceptButton = document.querySelector('[data-cookie-accept]');
+const cookieChooseButton = document.querySelector('[data-cookie-choose]');
+const cookieSaveButton = document.querySelector('[data-cookie-save]');
+const cookiePreferences = document.querySelector('[data-cookie-preferences]');
+const cookieReopenButton = document.querySelector('[data-cookie-reopen]');
+const cookieBackButton = document.querySelector('[data-cookie-back]');
+const cookieAcceptAllButton = document.querySelector('[data-cookie-accept-all]');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const COOKIE_CONSENT_NAME = 'tecescola_cookie_consent';
+const COOKIE_CONSENT_VALUE = 'accepted';
+const COOKIE_ANALYTICS_NAME = 'tecescola_cookie_analytics';
+const COOKIE_CONSENT_MAX_AGE = 60 * 60 * 24 * 365;
 let heroIndex = 0;
 let heroTimer;
 let phoneTimer;
@@ -49,6 +61,111 @@ let featureCardsInView = false;
 let stackPanelTimer;
 let stackPanelsInView = false;
 const STACK_PANEL_DURATION = 2200;
+const GA_MEASUREMENT_ID = 'G-P5F74C5E98';
+let analyticsLoadPromise;
+
+function loadAnalyticsAfterConsent() {
+  if (!hasAnalyticsConsent() || analyticsLoadPromise) return analyticsLoadPromise;
+  analyticsLoadPromise = new Promise((resolve) => {
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function gtag() { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', GA_MEASUREMENT_ID, { send_page_view: false });
+    const analyticsScript = document.createElement('script');
+    analyticsScript.async = true;
+    analyticsScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+    analyticsScript.onload = () => {
+      window.gtag('event', 'page_view', { page_title: document.title, page_location: window.location.href });
+      resolve();
+    };
+    analyticsScript.onerror = resolve;
+    document.head.appendChild(analyticsScript);
+  });
+  return analyticsLoadPromise;
+}
+
+function trackEvent(name, parameters = {}) {
+  if (!hasAnalyticsConsent()) return;
+  loadAnalyticsAfterConsent();
+  if (typeof window.gtag === 'function') window.gtag('event', name, parameters);
+  window.dispatchEvent(new CustomEvent('tec:analytics', { detail: { name, parameters } }));
+}
+
+function hasCookieConsent() {
+  return document.cookie.split('; ').some((cookie) => cookie === `${COOKIE_CONSENT_NAME}=${COOKIE_CONSENT_VALUE}`);
+}
+
+function hasAnalyticsConsent() {
+  return document.cookie.split('; ').some((cookie) => cookie === `${COOKIE_ANALYTICS_NAME}=accepted`);
+}
+
+function storeCookieConsent(analyticsAllowed = true) {
+  const secureAttribute = window.location.protocol === 'https:' ? '; Secure' : '';
+  document.cookie = `${COOKIE_CONSENT_NAME}=${COOKIE_CONSENT_VALUE}; Max-Age=${COOKIE_CONSENT_MAX_AGE}; Path=/; SameSite=Lax${secureAttribute}`;
+  document.cookie = `${COOKIE_ANALYTICS_NAME}=${analyticsAllowed ? 'accepted' : 'denied'}; Max-Age=${COOKIE_CONSENT_MAX_AGE}; Path=/; SameSite=Lax${secureAttribute}`;
+}
+
+function closeCookieBanner(analyticsAllowed = true) {
+  if (!cookieBanner || !cookieReopenButton) return;
+  storeCookieConsent(analyticsAllowed);
+  if (analyticsAllowed) loadAnalyticsAfterConsent();
+  trackEvent('cookie_consent_granted');
+  cookieBanner.hidden = true;
+  cookieReopenButton.hidden = false;
+  cookiePreferences?.setAttribute('hidden', '');
+  document.querySelector('.cookie-banner-body')?.removeAttribute('hidden');
+  document.querySelector('.cookie-banner-actions')?.removeAttribute('hidden');
+  cookieChooseButton?.setAttribute('aria-expanded', 'false');
+}
+
+function openCookieBanner() {
+  if (!cookieBanner || !cookieReopenButton) return;
+  cookieBanner.hidden = false;
+  cookieReopenButton.hidden = true;
+  cookiePreferences?.setAttribute('hidden', '');
+  document.querySelector('.cookie-banner-body')?.removeAttribute('hidden');
+  document.querySelector('.cookie-banner-actions')?.removeAttribute('hidden');
+  cookieChooseButton?.setAttribute('aria-expanded', 'false');
+}
+
+function showCookiePreferences() {
+  if (!cookiePreferences) return;
+  document.querySelector('.cookie-banner-body')?.setAttribute('hidden', '');
+  document.querySelector('.cookie-banner-actions')?.setAttribute('hidden', '');
+  cookiePreferences.removeAttribute('hidden');
+  cookieChooseButton?.setAttribute('aria-expanded', 'true');
+}
+
+function hideCookiePreferences() {
+  cookiePreferences?.setAttribute('hidden', '');
+  document.querySelector('.cookie-banner-body')?.removeAttribute('hidden');
+  document.querySelector('.cookie-banner-actions')?.removeAttribute('hidden');
+  cookieChooseButton?.setAttribute('aria-expanded', 'false');
+}
+
+function initCookieConsent() {
+  if (!cookieBanner || !cookieAcceptButton || !cookieReopenButton) return;
+  cookieAcceptButton.addEventListener('click', closeCookieBanner);
+  cookieSaveButton?.addEventListener('click', () => {
+    const analyticsAllowed = [...document.querySelectorAll('[data-cookie-optional]')].some((input) => input.checked);
+    closeCookieBanner(analyticsAllowed);
+  });
+  cookieAcceptAllButton?.addEventListener('click', closeCookieBanner);
+  cookieBackButton?.addEventListener('click', hideCookiePreferences);
+  cookieReopenButton.addEventListener('click', openCookieBanner);
+  cookieChooseButton?.addEventListener('click', () => {
+    showCookiePreferences();
+  });
+  if (hasCookieConsent()) {
+    cookieBanner.hidden = true;
+    cookieReopenButton.hidden = false;
+    if (hasAnalyticsConsent()) loadAnalyticsAfterConsent();
+    return;
+  }
+  cookieReopenButton.hidden = true;
+}
+
+initCookieConsent();
 
 function trackVideoAudioPreference(video) {
   if (!video || video.dataset.audioPreferenceTracked) return;
@@ -97,9 +214,14 @@ if (whatsappLink && whatsappNumber) {
   whatsappLink.href = getWhatsappUrl();
   whatsappLink.target = '_blank';
   whatsappLink.rel = 'noopener noreferrer';
+  whatsappLink.addEventListener('click', () => trackEvent('whatsapp_click', { placement: 'floating' }));
 }
 
 const footerSocials = document.querySelector('.footer-socials');
+document.querySelectorAll('a[href="#demonstracao"], a[href="./index.html#demonstracao"]').forEach((link) => {
+  link.addEventListener('click', () => trackEvent('demo_click', { placement: link.className || 'navigation' }));
+});
+
 if (footerSocials && !footerSocials.querySelector('[data-youtube-placeholder]')) {
   const youtubePlaceholder = document.createElement('span');
   youtubePlaceholder.className = 'social-link social-link-placeholder';
