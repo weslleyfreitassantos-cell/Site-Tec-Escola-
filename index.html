@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Tec Escola conecta a gestão acadêmica, alunos, famílias e educadores em uma única plataforma." />
     <meta name="theme-color" content="#092b88" />
-    <link rel="icon" type="image/png" href="./assets/logo-tec-escola.png?v=tec-favicon" />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg?v=tec-favicon-2" />
     <title>Tec Escola | Gestão acadêmica conectada</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -282,6 +282,24 @@
     </section>
     <button class="cookie-reopen" type="button" data-cookie-reopen aria-label="Abrir preferências de cookies" hidden><span aria-hidden="true">🍪</span></button>
     <script src="./script.js?v=tv-escola-64"></script>
+    <script>
+      (() => {
+        const banner = document.querySelector('[data-cookie-banner]');
+        const reopen = document.querySelector('[data-cookie-reopen]');
+        const body = document.querySelector('.cookie-banner-body');
+        const actions = document.querySelector('.cookie-banner-actions');
+        const preferences = document.querySelector('[data-cookie-preferences]');
+        const hide = () => { banner?.setAttribute('hidden', ''); reopen?.removeAttribute('hidden'); document.cookie = 'tecescola_cookie_consent=accepted; Max-Age=31536000; Path=/; SameSite=Lax; Secure'; };
+        const show = () => { banner?.removeAttribute('hidden'); reopen?.setAttribute('hidden', ''); };
+        document.querySelector('[data-cookie-accept]')?.addEventListener('click', hide);
+        document.querySelector('[data-cookie-accept-all]')?.addEventListener('click', hide);
+        document.querySelector('[data-cookie-save]')?.addEventListener('click', hide);
+        reopen?.addEventListener('click', show);
+        document.querySelector('[data-cookie-choose]')?.addEventListener('click', () => { body?.setAttribute('hidden', ''); actions?.setAttribute('hidden', ''); preferences?.removeAttribute('hidden'); });
+        document.querySelector('[data-cookie-back]')?.addEventListener('click', () => { preferences?.setAttribute('hidden', ''); body?.removeAttribute('hidden'); actions?.removeAttribute('hidden'); });
+        if (document.cookie.includes('tecescola_cookie_consent=accepted')) hide();
+      })();
+    </script>
   </body>
 </html>
 
