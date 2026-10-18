@@ -324,6 +324,11 @@ h3 { font-size: 21px; line-height: 1.1; }
 .plans-format-heading p strong { color: #1670ee; }
 .plans-grid-monthly { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; }
 .plans-grid-annual { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 1040px; margin: 0 auto; }
+.plans-slide-heading { margin: 0 auto 38px; text-align: center; }
+.plans-slide-heading h2 { margin: 0; color: #102d72; font-size: clamp(38px, 5vw, 72px); line-height: .98; letter-spacing: -.04em; }
+.plans-slide-heading h2 em { color: #1670ee; font-style: normal; }
+.plans-slide-heading p { margin: 14px 0 4px; color: #416288; font-size: 24px; }
+.plans-slide-heading strong { color: #1670ee; font-size: 24px; }
 .plans-carousel { position: relative; display: grid; margin-top: 0; outline: none; }
 .plans-slide { grid-area: 1 / 1; visibility: hidden; opacity: 0; pointer-events: none; transform: translateY(8px); transition: opacity .38s ease, transform .38s ease, visibility 0s linear .38s; }
 .plans-slide.is-active { visibility: visible; opacity: 1; pointer-events: auto; transform: translateY(0); transition-delay: 0s; }
@@ -348,6 +353,8 @@ h3 { font-size: 21px; line-height: 1.1; }
 .plan-card-annual.plan-card-featured .plan-features { color: #e5f0ff; }
 .plan-card-annual { min-height: 0; }
 .plan-icon { display: grid; place-items: center; width: 64px; height: 64px; margin: 0 0 18px auto; border-radius: 20px; color: #0966e9; background: #e5f2ff; font-size: 31px; font-weight: 800; }
+.plan-card-annual .plan-icon { float: left; margin: 0 22px 14px 0; }
+.plan-card-annual h3 { min-height: 64px; padding-top: 10px; }
 .plan-card h3 em { color: #0966e9; font-style: normal; }
 .plan-card .plan-price strong { font-size: clamp(36px, 4vw, 58px); }
 .plan-card .plan-price span { font-size: 20px; }
