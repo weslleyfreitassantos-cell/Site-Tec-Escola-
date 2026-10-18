@@ -340,6 +340,12 @@ h3 { font-size: 21px; line-height: 1.1; }
 @keyframes plan-card-sheen { 0%, 58%, 100% { left: -75%; opacity: 0; } 64% { opacity: 1; } 78% { left: 135%; opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .plans-slide, .plan-card { transition: none; } .plans-slide.is-active .plan-card::after { animation: none; } }
 .plan-card-light, .plan-card-annual { background: rgba(255,255,255,.94); border: 1px solid #dcecff; }
+.plan-card-annual.plan-card-featured { color: #fff; background: #12358f; border-color: #1670ee; }
+.plan-card-annual.plan-card-featured h3 { color: #fff; }
+.plan-card-annual.plan-card-featured h3 em { color: #a9f1e5; }
+.plan-card-annual.plan-card-featured .plan-price { color: #fff; }
+.plan-card-annual.plan-card-featured .plan-description { color: #d9e8ff; }
+.plan-card-annual.plan-card-featured .plan-features { color: #e5f0ff; }
 .plan-card-annual { min-height: 0; }
 .plan-icon { display: grid; place-items: center; width: 64px; height: 64px; margin: 0 0 18px auto; border-radius: 20px; color: #0966e9; background: #e5f2ff; font-size: 31px; font-weight: 800; }
 .plan-card h3 em { color: #0966e9; font-style: normal; }
