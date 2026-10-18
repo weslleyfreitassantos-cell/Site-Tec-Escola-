@@ -314,8 +314,10 @@ h3 { font-size: 21px; line-height: 1.1; }
 @media (max-width: 1100px) { .plans-layout { grid-template-columns: 1fr; }.plans-visual { min-height: 360px; }.plans-visual-window { max-width: 540px; }.plans-grid { max-width: none; } }
 @media (max-width: 760px) { .plans-section { padding: 76px 0 68px; }.plans-heading { grid-template-columns: 1fr; gap: 18px; }.plans-heading h2 { font-size: clamp(38px, 11vw, 56px); }.plans-layout { margin-top: 38px; }.plans-visual { min-height: 330px; padding: 22px; }.plans-visual-window { min-height: 210px; }.plans-grid { grid-template-columns: 1fr; }.plan-card { min-height: 0; }.plan-description { min-height: 0; }.plans-annual-note { align-items: flex-start; flex-direction: column; gap: 5px; } }
 
-.plans-heading-centered { display: block; text-align: center; max-width: 900px; margin-inline: auto; }
-.plans-heading-centered .section-lead { max-width: none; margin-top: 14px; }
+.plans-heading-centered { display: block; width: 100%; max-width: 980px; margin-inline: auto; text-align: center; }
+.plans-heading-centered > div { display: flex; flex-direction: column; align-items: center; }
+.plans-heading-centered h2 { width: 100%; max-width: 900px; margin-inline: auto; text-align: center; }
+.plans-heading-centered .section-lead { width: 100%; max-width: none; margin: 14px auto 0; text-align: center; }
 .plans-format-heading { display: flex; align-items: baseline; justify-content: center; gap: 14px; margin: 52px 0 22px; color: #102d72; }
 .plans-format-heading span { color: #1670ee; font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
 .plans-format-heading p { margin: 0; font-size: 24px; font-weight: 700; }
