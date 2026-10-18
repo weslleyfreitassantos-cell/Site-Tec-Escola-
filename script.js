@@ -679,4 +679,20 @@ if (plansCarousel && plansSlides.length > 1) {
   plansDots.forEach((dot) => dot.addEventListener('click', () => {
     showPlansSlide(Number(dot.dataset.plansDot));
   }));
+
+  let plansPointerStartX = null;
+  plansCarousel.addEventListener('pointerdown', (event) => {
+    if (event.pointerType === 'mouse' && event.button !== 0) return;
+    plansPointerStartX = event.clientX;
+  });
+  plansCarousel.addEventListener('pointerup', (event) => {
+    if (plansPointerStartX === null) return;
+    const deltaX = event.clientX - plansPointerStartX;
+    plansPointerStartX = null;
+    if (Math.abs(deltaX) < 50) return;
+    showPlansSlide(plansIndex + (deltaX < 0 ? 1 : -1));
+  });
+  plansCarousel.addEventListener('pointercancel', () => {
+    plansPointerStartX = null;
+  });
 }
