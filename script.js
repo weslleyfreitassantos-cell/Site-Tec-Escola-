@@ -659,3 +659,38 @@ demoForm?.addEventListener('submit', (event) => {
   formStatus.textContent = 'Abrindo o WhatsApp para concluir o atendimento...';
   window.location.assign(getWhatsappUrl(message));
 });
+
+const plansCarousel = document.querySelector('[data-plans-carousel]');
+const plansSlides = [...document.querySelectorAll('[data-plans-slide]')];
+const plansDots = [...document.querySelectorAll('[data-plans-dot]')];
+let plansIndex = 0;
+let plansTimer;
+let plansPaused = false;
+
+const showPlansSlide = (index) => {
+  plansIndex = (index + plansSlides.length) % plansSlides.length;
+  plansSlides.forEach((slide, slideIndex) => slide.classList.toggle('is-active', slideIndex === plansIndex));
+  plansDots.forEach((dot, dotIndex) => {
+    const active = dotIndex === plansIndex;
+    dot.classList.toggle('is-active', active);
+    dot.setAttribute('aria-pressed', String(active));
+  });
+};
+
+const stopPlansCarousel = () => {
+  plansPaused = true;
+  window.clearInterval(plansTimer);
+};
+
+if (plansCarousel && plansSlides.length > 1) {
+  plansTimer = window.setInterval(() => {
+    if (!plansPaused) showPlansSlide(plansIndex + 1);
+  }, 2000);
+  plansCarousel.addEventListener('pointerdown', stopPlansCarousel, { once: true });
+  plansCarousel.addEventListener('touchstart', stopPlansCarousel, { once: true, passive: true });
+  plansCarousel.addEventListener('focusin', stopPlansCarousel, { once: true });
+  plansDots.forEach((dot) => dot.addEventListener('click', () => {
+    stopPlansCarousel();
+    showPlansSlide(Number(dot.dataset.plansDot));
+  }));
+}
