@@ -326,8 +326,8 @@ h3 { font-size: 21px; line-height: 1.1; }
 .plans-grid-monthly { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; }
 .plans-grid-annual { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 1040px; margin: 0 auto; }
 .plans-carousel { position: relative; display: grid; margin-top: 0; outline: none; }
-.plans-slide { grid-area: 1 / 1; visibility: hidden; opacity: 0; pointer-events: none; transform: translateY(8px); transition: opacity .38s ease, transform .38s ease, visibility 0s linear .38s; }
-.plans-slide.is-active { visibility: visible; opacity: 1; pointer-events: auto; transform: translateY(0); transition-delay: 0s; }
+.plans-slide { grid-area: 1 / 1; visibility: hidden; opacity: 0; pointer-events: none; transition: opacity .28s ease, visibility 0s linear .28s; }
+.plans-slide.is-active { visibility: visible; opacity: 1; pointer-events: auto; transition-delay: 0s; }
 .plans-carousel-dots { display: flex; justify-content: center; gap: 10px; margin-top: 22px; }
 .plans-carousel-dot { width: 11px; height: 11px; border: 0; border-radius: 50%; padding: 0; cursor: pointer; background: #a8c7e6; }
 .plans-carousel-dot.is-active { width: 30px; border-radius: 999px; background: #126fe8; }
