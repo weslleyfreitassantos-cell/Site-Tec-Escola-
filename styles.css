@@ -324,14 +324,21 @@ h3 { font-size: 21px; line-height: 1.1; }
 .plans-format-heading p strong { color: #1670ee; }
 .plans-grid-monthly { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; }
 .plans-grid-annual { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 1040px; margin: 0 auto; }
-.plans-carousel { position: relative; margin-top: 0; outline: none; }
-.plans-slide { display: none; animation: plans-slide-in .38s ease both; }
-.plans-slide.is-active { display: block; }
+.plans-carousel { position: relative; display: grid; margin-top: 0; outline: none; }
+.plans-slide { grid-area: 1 / 1; visibility: hidden; opacity: 0; pointer-events: none; transform: translateY(8px); transition: opacity .38s ease, transform .38s ease, visibility 0s linear .38s; }
+.plans-slide.is-active { visibility: visible; opacity: 1; pointer-events: auto; transform: translateY(0); transition-delay: 0s; }
 .plans-carousel-dots { display: flex; justify-content: center; gap: 10px; margin-top: 22px; }
 .plans-carousel-dot { width: 11px; height: 11px; border: 0; border-radius: 50%; padding: 0; cursor: pointer; background: #a8c7e6; }
 .plans-carousel-dot.is-active { width: 30px; border-radius: 999px; background: #126fe8; }
 .plans-carousel-dot:focus-visible { outline: 3px solid #0b2b68; outline-offset: 4px; }
-@keyframes plans-slide-in { from { opacity: .2; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.plan-card { position: relative; overflow: hidden; transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease; }
+.plan-card::after { position: absolute; top: 0; bottom: 0; left: -75%; width: 42%; transform: skewX(-18deg); background: linear-gradient(90deg, transparent, rgba(255,255,255,.34), transparent); content: ''; pointer-events: none; opacity: 0; }
+.plan-card:hover, .plan-card:focus-within { transform: translateY(-5px); box-shadow: 0 18px 34px rgba(10, 67, 145, .16); border-color: #75b9ff; }
+.plans-slide.is-active .plan-card::after { animation: plan-card-sheen 4.8s ease-in-out infinite; animation-delay: var(--plan-delay, 0s); }
+.plans-slide.is-active .plan-card:nth-child(2) { --plan-delay: 1.2s; }
+.plans-slide.is-active .plan-card:nth-child(3) { --plan-delay: 2.4s; }
+@keyframes plan-card-sheen { 0%, 58%, 100% { left: -75%; opacity: 0; } 64% { opacity: 1; } 78% { left: 135%; opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .plans-slide, .plan-card { transition: none; } .plans-slide.is-active .plan-card::after { animation: none; } }
 .plan-card-light, .plan-card-annual { background: rgba(255,255,255,.94); border: 1px solid #dcecff; }
 .plan-card-annual { min-height: 0; }
 .plan-icon { display: grid; place-items: center; width: 64px; height: 64px; margin: 0 0 18px auto; border-radius: 20px; color: #0966e9; background: #e5f2ff; font-size: 31px; font-weight: 800; }
