@@ -314,6 +314,23 @@ h3 { font-size: 21px; line-height: 1.1; }
 @media (max-width: 1100px) { .plans-layout { grid-template-columns: 1fr; }.plans-visual { min-height: 360px; }.plans-visual-window { max-width: 540px; }.plans-grid { max-width: none; } }
 @media (max-width: 760px) { .plans-section { padding: 76px 0 68px; }.plans-heading { grid-template-columns: 1fr; gap: 18px; }.plans-heading h2 { font-size: clamp(38px, 11vw, 56px); }.plans-layout { margin-top: 38px; }.plans-visual { min-height: 330px; padding: 22px; }.plans-visual-window { min-height: 210px; }.plans-grid { grid-template-columns: 1fr; }.plan-card { min-height: 0; }.plan-description { min-height: 0; }.plans-annual-note { align-items: flex-start; flex-direction: column; gap: 5px; } }
 
+.plans-heading-centered { display: block; text-align: center; max-width: 900px; margin-inline: auto; }
+.plans-heading-centered .section-lead { max-width: none; margin-top: 14px; }
+.plans-art-block { max-width: 1262px; margin: 48px auto 0; }
+.plans-art-block-annual { margin-top: 54px; }
+.plans-art { display: block; width: 100%; height: auto; border-radius: 18px; box-shadow: 0 18px 50px rgba(25, 86, 165, .13); }
+.plans-art-actions { display: grid; gap: 16px; margin: 18px auto 0; }
+.plans-art-actions-three { grid-template-columns: repeat(3, 1fr); }
+.plans-art-actions-two { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 900px; }
+.plans-art-actions .button { justify-content: center; min-height: 52px; }
+.plans-art-actions .button span { margin-left: 8px; }
+@media (max-width: 760px) {
+  .plans-art-block { margin-top: 32px; }
+  .plans-art-block-annual { margin-top: 42px; }
+  .plans-art { border-radius: 12px; }
+  .plans-art-actions-three, .plans-art-actions-two { grid-template-columns: 1fr; max-width: 420px; }
+}
+
 .mobile-experience { overflow: hidden; background: #0c2b83; }
 .mobile-grid { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 100px; }
 .phone-stage { position: relative; display: grid; min-height: 610px; place-items: center; }
