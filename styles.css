@@ -357,6 +357,7 @@ h3 { font-size: 21px; line-height: 1.1; }
 .plan-contact-callout span { font-size: 34px; }
 .plan-features li > strong { color: #102d72; font-weight: 900; }
 .plan-features small { display: block; margin: 3px 0 14px; color: #54709e; font-size: 14px; line-height: 1.35; }
+.plan-price-note { display: block; margin: -12px 0 14px; color: #54709e; font-size: 12px; line-height: 1.2; }
 .plan-discount { margin: 16px 0; padding: 8px 12px; border-radius: 7px; color: #087c3f; background: #e3f8e9; font-weight: 700; text-align: center; }
 .plans-format-heading-annual { margin-top: 76px; }
 @media (max-width: 900px) { .plans-grid-monthly { grid-template-columns: 1fr; max-width: 560px; margin-inline: auto; } .plans-grid-annual { grid-template-columns: 1fr; max-width: 560px; } }
