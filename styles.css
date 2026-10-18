@@ -350,8 +350,8 @@ h3 { font-size: 21px; line-height: 1.1; }
 .plan-card h3 em { color: #0966e9; font-style: normal; }
 .plan-card .plan-price strong { font-size: clamp(36px, 4vw, 58px); }
 .plan-card .plan-price span { font-size: 20px; }
-.plan-card .plan-price { display: inline-flex; align-items: baseline; flex-wrap: nowrap; white-space: nowrap; }
-.plan-card .plan-price strong { display: inline-block; min-width: 0; font-size: clamp(30px, 3.35vw, 48px); white-space: nowrap; }
+.plan-card .plan-price { display: flex; width: 100%; align-items: baseline; flex-direction: row; flex-wrap: nowrap; white-space: nowrap; }
+.plan-card .plan-price strong { display: inline-block; min-width: 0; flex: 0 1 auto; font-size: clamp(26px, 2.8vw, 42px); white-space: nowrap !important; word-break: keep-all; overflow-wrap: normal; }
 .plan-card .plan-price span { flex: 0 0 auto; white-space: nowrap; }
 .plan-contact-callout { display: flex; align-items: center; gap: 14px; min-height: 92px; margin: 24px 0; padding: 18px; border-radius: 14px; color: #0868e9; background: #e8f4ff; font-size: 18px; }
 .plan-contact-callout span { font-size: 34px; }
