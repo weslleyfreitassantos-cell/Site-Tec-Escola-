@@ -371,7 +371,7 @@ h3 { font-size: 21px; line-height: 1.1; }
   .plans-section > .shell { width: min(1340px, calc(100% - 32px)); }
   .plans-carousel { width: calc(100% + 56px); margin-left: -28px; }
   .plans-grid-annual { max-width: 1340px; gap: 24px; }
-  .plan-card-annual { height: 520px; min-height: 520px; padding: 24px 32px 20px; }
+  .plan-card-annual { height: auto; min-height: 620px; padding: 28px 32px 24px; }
   .plan-card-annual h3 { font-size: 42px; }
   .plan-card-annual .plan-price strong { font-size: clamp(42px, 4vw, 60px); }
   .plan-card-annual .plan-price span { font-size: 22px; }
@@ -379,7 +379,7 @@ h3 { font-size: 21px; line-height: 1.1; }
   .plan-card-annual .plan-discount { font-size: 16px; }
   .plan-card-annual .plan-description { font-size: 22px; line-height: 1.5; }
   .plan-card-annual .plan-features { gap: 17px; font-size: 21px; line-height: 1.45; }
-  .plans-grid-monthly .plan-card { height: 520px; min-height: 520px; padding: 24px 28px 20px; }
+  .plans-grid-monthly .plan-card { height: auto; min-height: 620px; padding: 28px 28px 24px; }
   .plans-grid-monthly .plan-card h3 { font-size: 38px; }
   .plans-grid-monthly .plan-card .plan-price strong { font-size: clamp(38px, 3.4vw, 52px); }
   .plans-grid-monthly .plan-card .plan-price span { font-size: 19px; }
