@@ -365,6 +365,8 @@ h3 { font-size: 21px; line-height: 1.1; }
 .plan-price-note { display: block; margin: -12px 0 14px; color: #54709e; font-size: 14px; line-height: 1.3; }
 .plan-price-note strong { color: inherit; font-weight: 800; }
 .plan-price-note s { opacity: .72; }
+.plan-card-featured .plan-price-note { color: #d8e8ff; }
+.plan-card-featured .plan-price-note s { opacity: .88; }
 @media (min-width: 761px) {
   .plans-grid-annual { max-width: 1180px; gap: 24px; }
   .plan-card-annual { min-height: 590px; padding: 30px 32px 24px; }
