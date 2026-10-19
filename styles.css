@@ -368,9 +368,10 @@ h3 { font-size: 21px; line-height: 1.1; }
 .plan-card-featured .plan-price-note { color: #d8e8ff; }
 .plan-card-featured .plan-price-note s { opacity: .88; }
 @media (min-width: 761px) {
-  .plans-section > .shell { width: min(1260px, calc(100% - 48px)); }
-  .plans-grid-annual { max-width: 1260px; gap: 24px; }
-  .plan-card-annual { min-height: 540px; padding: 28px 34px 22px; }
+  .plans-section > .shell { width: min(1340px, calc(100% - 32px)); }
+  .plans-carousel { width: calc(100% + 56px); margin-left: -28px; }
+  .plans-grid-annual { max-width: 1340px; gap: 24px; }
+  .plan-card-annual { height: 520px; min-height: 520px; padding: 24px 32px 20px; }
   .plan-card-annual h3 { font-size: 42px; }
   .plan-card-annual .plan-price strong { font-size: clamp(42px, 4vw, 60px); }
   .plan-card-annual .plan-price span { font-size: 22px; }
@@ -378,12 +379,13 @@ h3 { font-size: 21px; line-height: 1.1; }
   .plan-card-annual .plan-discount { font-size: 16px; }
   .plan-card-annual .plan-description { font-size: 22px; line-height: 1.5; }
   .plan-card-annual .plan-features { gap: 17px; font-size: 21px; line-height: 1.45; }
-  .plans-grid-monthly .plan-card { min-height: 540px; padding: 28px 30px 22px; }
+  .plans-grid-monthly .plan-card { height: 520px; min-height: 520px; padding: 24px 28px 20px; }
   .plans-grid-monthly .plan-card h3 { font-size: 38px; }
   .plans-grid-monthly .plan-card .plan-price strong { font-size: clamp(38px, 3.4vw, 52px); }
   .plans-grid-monthly .plan-card .plan-price span { font-size: 19px; }
   .plans-grid-monthly .plan-card .plan-description { font-size: 21px; line-height: 1.5; }
-  .plans-grid-monthly .plan-card .plan-features { gap: 17px; font-size: 20px; line-height: 1.45; }
+  .plans-grid-monthly .plan-card .plan-features { gap: 12px; font-size: 20px; line-height: 1.35; }
+  .plans-grid-annual .plan-features { gap: 12px; line-height: 1.35; }
   .plans-grid-monthly .button-plan, .plans-grid-annual .button-plan { min-height: 54px; font-size: 17px; }
 }
 .plan-discount { margin: 16px 0; padding: 8px 12px; border-radius: 7px; color: #087c3f; background: #e3f8e9; font-weight: 700; text-align: center; }
