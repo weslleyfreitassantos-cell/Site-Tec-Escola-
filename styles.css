@@ -325,7 +325,7 @@ h3 { font-size: 21px; line-height: 1.1; }
 .plans-format-heading p { margin: 0; font-size: 24px; font-weight: 700; }
 .plans-format-heading p strong { color: #1670ee; }
 .plans-grid-monthly { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; }
-.plans-grid-annual { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 1040px; margin: 0 auto; }
+.plans-grid-annual { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 1120px; margin: 0 auto; gap: 20px; }
 .plans-carousel { position: relative; display: grid; margin-top: 0; outline: none; touch-action: pan-y; }
 .plans-slide { grid-area: 1 / 1; visibility: hidden; opacity: 0; pointer-events: none; transition: opacity .28s ease, visibility 0s linear .28s; }
 .plans-slide.is-active { visibility: visible; opacity: 1; pointer-events: auto; transition-delay: 0s; }
@@ -348,7 +348,10 @@ h3 { font-size: 21px; line-height: 1.1; }
 .plan-card-annual.plan-card-featured .plan-price { color: #fff; }
 .plan-card-annual.plan-card-featured .plan-description { color: #d9e8ff; }
 .plan-card-annual.plan-card-featured .plan-features { color: #e5f0ff; }
-.plan-card-annual { min-height: 0; }
+.plan-card-annual { min-height: 0; padding: 34px 30px 28px; }
+.plan-card-annual h3 { font-size: 30px; }
+.plan-card-annual .plan-description { font-size: 16px; }
+.plan-card-annual .plan-features { font-size: 15px; }
 .plan-card h3 em { color: #0966e9; font-style: normal; }
 .plan-card .plan-price strong { font-size: clamp(36px, 4vw, 58px); }
 .plan-card .plan-price span { font-size: 20px; }
@@ -359,7 +362,9 @@ h3 { font-size: 21px; line-height: 1.1; }
 .plan-contact-callout span { font-size: 34px; }
 .plan-features li > strong { color: #102d72; font-weight: 900; }
 .plan-features small { display: block; margin: 3px 0 14px; color: #54709e; font-size: 14px; line-height: 1.35; }
-.plan-price-note { display: block; margin: -12px 0 14px; color: #54709e; font-size: 12px; line-height: 1.2; }
+.plan-price-note { display: block; margin: -12px 0 14px; color: #54709e; font-size: 14px; line-height: 1.3; }
+.plan-price-note strong { color: inherit; font-weight: 800; }
+.plan-price-note s { opacity: .72; }
 .plan-discount { margin: 16px 0; padding: 8px 12px; border-radius: 7px; color: #087c3f; background: #e3f8e9; font-weight: 700; text-align: center; }
 .plans-format-heading-annual { margin-top: 76px; }
 @media (max-width: 900px) { .plans-grid-monthly { grid-template-columns: 1fr; max-width: 560px; margin-inline: auto; } .plans-grid-annual { grid-template-columns: 1fr; max-width: 560px; } }
